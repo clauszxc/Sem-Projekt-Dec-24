@@ -19,7 +19,7 @@ namespace Sem_Projekt_Dec_24
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
-            Console.WriteLine("Løgslikker");
+            Console.WriteLine("Hej");
         }
     }
 }
