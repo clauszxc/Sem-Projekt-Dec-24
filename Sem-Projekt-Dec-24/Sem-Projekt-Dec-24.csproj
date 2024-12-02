@@ -52,11 +52,14 @@
     <Compile Include="Tables\Customers.cs" />
     <Compile Include="Tables\Employees.cs" />
     <Compile Include="Tables\Items.cs" />
+    <Compile Include="Tables\OrderInvoices.cs" />
     <Compile Include="Tables\Orders.cs" />
     <Compile Include="Tables\Products.cs" />
-    <Compile Include="Tables\Purchasing.cs" />
-    <Compile Include="Tables\Shipment.cs" />
+    <Compile Include="Tables\PurchaseOrderInvoices.cs" />
+    <Compile Include="Tables\PurchaseOrders.cs" />
+    <Compile Include="Tables\Shipments.cs" />
     <Compile Include="Tables\Shippers.cs" />
+    <Compile Include="Tables\Suppliers.cs" />
     <Compile Include="Winforms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

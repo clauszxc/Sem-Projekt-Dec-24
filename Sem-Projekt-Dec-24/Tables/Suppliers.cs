@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Sem_Projekt_Dec_24.Tables
 {
-    internal class Purchasing
+    internal class Suppliers
     {
-        public int PurchasID { get; set; }
+        public int SupplierId { get; set; }
 
-        public Purchasing(int purchasID)
+        public Suppliers(int supplierId)
         {
-            PurchasID = purchasID;
+            SupplierId = supplierId;
         }
     }
 }
