@@ -10,13 +10,11 @@ using System.Windows.Forms;
 
 namespace Sem_Projekt_Dec_24.Winforms
 {
-    public partial class MainForm : Form
+    public partial class CustomerForm : Form
     {
-        public MainForm()
+        public CustomerForm()
         {
             InitializeComponent();
         }
-
-    
     }
 }
