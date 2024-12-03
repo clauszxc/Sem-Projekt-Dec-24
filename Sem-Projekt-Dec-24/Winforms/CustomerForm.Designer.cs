@@ -44,23 +44,27 @@
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(1, 132);
+            this.dgvProducts.Location = new System.Drawing.Point(2, 203);
+            this.dgvProducts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvProducts.Name = "dgvProducts";
-            this.dgvProducts.Size = new System.Drawing.Size(800, 317);
+            this.dgvProducts.RowHeadersWidth = 62;
+            this.dgvProducts.Size = new System.Drawing.Size(1200, 488);
             this.dgvProducts.TabIndex = 0;
             // 
             // txtbQuantity
             // 
-            this.txtbQuantity.Location = new System.Drawing.Point(503, 76);
+            this.txtbQuantity.Location = new System.Drawing.Point(754, 117);
+            this.txtbQuantity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtbQuantity.Name = "txtbQuantity";
-            this.txtbQuantity.Size = new System.Drawing.Size(100, 20);
+            this.txtbQuantity.Size = new System.Drawing.Size(148, 26);
             this.txtbQuantity.TabIndex = 1;
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(626, 73);
+            this.btnContinue.Location = new System.Drawing.Point(939, 112);
+            this.btnContinue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnContinue.Name = "btnContinue";
-            this.btnContinue.Size = new System.Drawing.Size(75, 23);
+            this.btnContinue.Size = new System.Drawing.Size(112, 35);
             this.btnContinue.TabIndex = 2;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
@@ -68,50 +72,56 @@
             // 
             // txtbEmail
             // 
-            this.txtbEmail.Location = new System.Drawing.Point(222, 79);
+            this.txtbEmail.Location = new System.Drawing.Point(333, 122);
+            this.txtbEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtbEmail.Name = "txtbEmail";
-            this.txtbEmail.Size = new System.Drawing.Size(100, 20);
+            this.txtbEmail.Size = new System.Drawing.Size(148, 26);
             this.txtbEmail.TabIndex = 3;
+            this.txtbEmail.TextChanged += new System.EventHandler(this.txtbEmail_TextChanged);
             // 
             // txtbAdress
             // 
-            this.txtbAdress.Location = new System.Drawing.Point(361, 76);
+            this.txtbAdress.Location = new System.Drawing.Point(542, 117);
+            this.txtbAdress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtbAdress.Name = "txtbAdress";
-            this.txtbAdress.Size = new System.Drawing.Size(100, 20);
+            this.txtbAdress.Size = new System.Drawing.Size(148, 26);
             this.txtbAdress.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(358, 60);
+            this.label1.Location = new System.Drawing.Point(537, 92);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 13);
+            this.label1.Size = new System.Drawing.Size(59, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "Adress";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(219, 63);
+            this.label2.Location = new System.Drawing.Point(328, 97);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 13);
+            this.label2.Size = new System.Drawing.Size(48, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Email";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(500, 60);
+            this.label3.Location = new System.Drawing.Point(750, 92);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.Size = new System.Drawing.Size(68, 20);
             this.label3.TabIndex = 7;
             this.label3.Text = "Quantity";
             // 
             // CustomerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1200, 692);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -120,6 +130,7 @@
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.txtbQuantity);
             this.Controls.Add(this.dgvProducts);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "CustomerForm";
             this.Text = "CustomerForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();

@@ -20,5 +20,7 @@ namespace Sem_Projekt_Dec_24.Tables
             ItemCategory = itemCategory;
             ItemStock = itemStock;
         }
+
+
     }
 }
