@@ -57,5 +57,38 @@ namespace Sem_Projekt_Dec_24.Data
             }
         }
 
+        public void AddItemsToStorage(Items items)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO Items (ItemId, ItemName, ItemCategory, ItemStock)" +
+                    "VALUES (@ItemId, @ItemName, @ItemCategory, @ItemStock";
+                using (SqlCommand command = new SqlCommand(_connectionString, connection))
+                {
+                    command.Parameters.AddWithValue("@ItemId", items.ItemId);
+                    command.Parameters.AddWithValue("@ItemName", items.ItemName);
+                    command.Parameters.AddWithValue("@ItemCategory", items.ItemCategory);
+                }
+            }
+        }
+
+        public void AddProductToStorage(Products products)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO Products(ProductId, ProductName, ProductCategory, ProductStock" +
+                    "VALUES (@ProductId, @ProductName, @ProductCategory, @ProductStock)";
+                using (SqlCommand command = new SqlCommand(_connectionString,connection))
+                {
+                    command.Parameters.AddWithValue("@ProductId", products.ProductId);
+                    command.Parameters.AddWithValue("@ProductName", products.ProductName);
+                    command.Parameters.AddWithValue("@ProductCategory", products.ProductName);
+                }
+            }
+        }
     }
 }

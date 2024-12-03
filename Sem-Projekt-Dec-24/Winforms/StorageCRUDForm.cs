@@ -24,5 +24,22 @@ namespace Sem_Projekt_Dec_24.Winforms
             employeeForm.Show();
             this.Hide();
         }
+
+        private void btnStorageItemsCreate_Click(object sender, EventArgs e)
+        {
+            string txtbStorageItemsIdString = txtbStorageItemsId.Text;
+            string txtbStorageItemsNameString = txtbStorageItemsName.Text;
+            string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
+
+            try
+            {
+                int txtbStorageItemsIdInt = Convert.ToInt32(txtbStorageItemsIdString);
+
+            }
+            catch
+            {
+
+            }
+        }
     }
 }
