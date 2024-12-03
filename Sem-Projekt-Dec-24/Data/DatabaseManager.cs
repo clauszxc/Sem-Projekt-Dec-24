@@ -56,6 +56,133 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+        public void AddOrderInvoice(OrderInvoices orderInvoice)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO OrderInvoice (OrderInvoiceId, CustomerId, ProductId, Price, Quantity) " +
+                    "VALUES (@OrderId, @CustomerId, @ProductId, @Price, @Quantity)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@OrderInvoiceId", orderInvoice.OrderInvoiceId);
+                    command.Parameters.AddWithValue("@CustomerId", orderInvoice.CustomerId);
+                    command.Parameters.AddWithValue("@ProductId", orderInvoice.ProductId);
+                    command.Parameters.AddWithValue("@Price", orderInvoice.Price);
+                    command.Parameters.AddWithValue("@Quantity", orderInvoice.Quantity);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        public List<Products> GetProducts()
+        {
+            List<Products> productList = new List<Products>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Products";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Products e = new Products(
+                                reader.GetInt32(0),
+                                reader.GetString(1), 
+                                reader.GetString(2),
+                                reader.GetInt32(3)
+                            );
+
+                            productList.Add(e);
+                        }
+                    }
+                }
+            }
+            return productList;
+        }
+        public List<Customers> GetCustomers()
+        {
+            List<Customers> customerList = new List<Customers>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Customers";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Customers e = new Customers(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2)
+                            );
+
+                            customerList.Add(e);
+                        }
+                    }
+                }
+            }
+            return customerList;
+        }
+        public List<Orders> GetOrders()
+        {
+            List<Orders> orderList = new List<Orders>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Orders";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Orders e = new Orders(
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetString(3)
+                            );
+
+                            orderList.Add(e);
+                        }
+                    }
+                }
+            }
+            return orderList;
+        }
+        public List<OrderInvoices> GetOrderInvoices()
+        {
+            List<OrderInvoices> orderInvoiceList = new List<OrderInvoices>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM OrderInvoices";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            OrderInvoices e = new OrderInvoices(
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetDecimal(3),
+                                reader.GetInt32(4)
+                            );
+
+                            orderInvoiceList.Add(e);
+                        }
+                    }
+                }
+            }
+            return orderInvoiceList;
+        }
 
     }
 }

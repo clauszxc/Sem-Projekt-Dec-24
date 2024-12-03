@@ -25,7 +25,9 @@ namespace Sem_Projekt_Dec_24.Winforms
         {
             InitializeComponent();
 
-            string connectionString = "Server=localhost;Database=SemProjectDB;User Id=sa;Password=1234;TrustServerCertificate=true;";
+            //string connectionString = "Server=localhost;Database=SemProjectDB;Encryption=Optional;TrustServerCertificate=true;";
+            string connectionString = "Server=localhost;Database=SemProjectDB;Trusted_Connection=True;TrustServerCertificate=True;";
+
             _dbManager = new DatabaseManager(connectionString);
 
             LoadProducts();
@@ -91,6 +93,8 @@ namespace Sem_Projekt_Dec_24.Winforms
                     Customers newCustomer = new Customers(customerId, customerEmail, customerAdress);
 
                     CustomerList.Add(newCustomer);
+                    _dbManager.AddCustomer(newCustomer);
+
                     ClearInputFields();
                     return;
                 }
@@ -116,6 +120,8 @@ namespace Sem_Projekt_Dec_24.Winforms
                     Orders newOrder = new Orders(orderId, customerId, shipperId, orderStatus);
 
                     OrderList.Add(newOrder);
+                    _dbManager.AddOrder(newOrder);
+
                     ClearInputFields();
                     return;
                 }
@@ -124,7 +130,7 @@ namespace Sem_Projekt_Dec_24.Winforms
 
             int orderInvoiceId = 1;
             int productId = 1;
-            decimal price = Convert.ToDecimal(txtbQuantity.Text);
+            decimal price = 1;
             int quantity = Convert.ToInt32(txtbQuantity.Text);
 
             for (int i = 0; i < OrderInvoiceList.Count; i++)
@@ -142,28 +148,27 @@ namespace Sem_Projekt_Dec_24.Winforms
                     OrderInvoices newOrderInvoice = new OrderInvoices(orderInvoiceId, customerId, productId, price, quantity);
 
                     OrderInvoiceList.Add(newOrderInvoice);
+                    _dbManager.AddOrderInvoice(newOrderInvoice);
+
                     ClearInputFields();
                     return;
                 }
 
             }
 
-            _dbManager.AddOrder(newOrder);
-            _dbManager.AddCustomer(newOrder);
-            OrderList.Add(newOrder);
+            //if (string.IsNullOrWhiteSpace(txtbAdress.Text) || string.IsNullOrWhiteSpace(txtbEmail.Text) || string.IsNullOrWhiteSpace(txtbQuantity.Text))
+            //{
+            //    MessageBox.Show("All fields must be filled in before proceeding.");
+            //    return;
+            //}
+
+            //CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm();
+            //customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
+            //customerConfirmationForm.Show();
+            //this.Hide();
 
             ClearInputFields();
 
-            if (string.IsNullOrWhiteSpace(txtbAdress.Text) || string.IsNullOrWhiteSpace(txtbEmail.Text) || string.IsNullOrWhiteSpace(txtbQuantity.Text))
-            {
-                MessageBox.Show("All fields must be filled in before proceeding.");
-                return;
-            }
-
-            CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm();
-            customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
-            customerConfirmationForm.Show();
-            this.Hide();
         }
     }
 }
