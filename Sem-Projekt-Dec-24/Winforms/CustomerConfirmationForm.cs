@@ -16,5 +16,23 @@ namespace Sem_Projekt_Dec_24.Winforms
         {
             InitializeComponent();
         }
+
+        private void btnNewOrder_Click(object sender, EventArgs e)
+        {
+            CustomerForm customerForm2 = new CustomerForm();
+            customerForm2.StartPosition = FormStartPosition.CenterScreen;
+            customerForm2.Show();
+            this.Hide();
+        }
+
+        private void btnCustomerGoBack_Click(object sender, EventArgs e)
+        {
+            CustomerForm customerForm = new CustomerForm();
+            customerForm.StartPosition = FormStartPosition.CenterScreen;
+            customerForm.Show();
+            this.Hide();
+        }
+
+       
     }
 }

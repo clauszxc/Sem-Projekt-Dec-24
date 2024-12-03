@@ -17,6 +17,12 @@ namespace Sem_Projekt_Dec_24.Winforms
             InitializeComponent();
         }
 
-     
+        private void btnStorageGoBack_Click(object sender, EventArgs e)
+        {
+            EmployeeForm employeeForm = new EmployeeForm();
+            employeeForm.StartPosition = FormStartPosition.CenterScreen;
+            employeeForm.Show();
+            this.Hide();
+        }
     }
 }

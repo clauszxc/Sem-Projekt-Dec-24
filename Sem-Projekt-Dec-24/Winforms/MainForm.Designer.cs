@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(298, 161);
+            this.label1.Location = new System.Drawing.Point(368, 154);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 0;
@@ -44,21 +44,23 @@
             // 
             // btnCustomer
             // 
-            this.btnCustomer.Location = new System.Drawing.Point(189, 225);
+            this.btnCustomer.Location = new System.Drawing.Point(237, 225);
             this.btnCustomer.Name = "btnCustomer";
             this.btnCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnCustomer.TabIndex = 1;
             this.btnCustomer.Text = "Customer";
             this.btnCustomer.UseVisualStyleBackColor = true;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // btnEmployee
             // 
-            this.btnEmployee.Location = new System.Drawing.Point(373, 224);
+            this.btnEmployee.Location = new System.Drawing.Point(509, 225);
             this.btnEmployee.Name = "btnEmployee";
             this.btnEmployee.Size = new System.Drawing.Size(75, 23);
             this.btnEmployee.TabIndex = 2;
             this.btnEmployee.Text = "Employee";
             this.btnEmployee.UseVisualStyleBackColor = true;
+            this.btnEmployee.Click += new System.EventHandler(this.btnEmployee_Click);
             // 
             // MainForm
             // 

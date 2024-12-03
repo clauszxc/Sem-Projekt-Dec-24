@@ -31,6 +31,7 @@
             this.dgvOrderConfirmation = new System.Windows.Forms.DataGridView();
             this.btnCreateOrderInvoice = new System.Windows.Forms.Button();
             this.btnNewOrder = new System.Windows.Forms.Button();
+            this.btnCustomerGoBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderConfirmation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,12 +60,24 @@
             this.btnNewOrder.TabIndex = 2;
             this.btnNewOrder.Text = "New Order";
             this.btnNewOrder.UseVisualStyleBackColor = true;
+            this.btnNewOrder.Click += new System.EventHandler(this.btnNewOrder_Click);
+            // 
+            // btnCustomerGoBack
+            // 
+            this.btnCustomerGoBack.Location = new System.Drawing.Point(12, 12);
+            this.btnCustomerGoBack.Name = "btnCustomerGoBack";
+            this.btnCustomerGoBack.Size = new System.Drawing.Size(75, 23);
+            this.btnCustomerGoBack.TabIndex = 3;
+            this.btnCustomerGoBack.Text = "Go Back";
+            this.btnCustomerGoBack.UseVisualStyleBackColor = true;
+            this.btnCustomerGoBack.Click += new System.EventHandler(this.btnCustomerGoBack_Click);
             // 
             // CustomerConfirmationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCustomerGoBack);
             this.Controls.Add(this.btnNewOrder);
             this.Controls.Add(this.btnCreateOrderInvoice);
             this.Controls.Add(this.dgvOrderConfirmation);
@@ -80,5 +93,6 @@
         private System.Windows.Forms.DataGridView dgvOrderConfirmation;
         private System.Windows.Forms.Button btnCreateOrderInvoice;
         private System.Windows.Forms.Button btnNewOrder;
+        private System.Windows.Forms.Button btnCustomerGoBack;
     }
 }
