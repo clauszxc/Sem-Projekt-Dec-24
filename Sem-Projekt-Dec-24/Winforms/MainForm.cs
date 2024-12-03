@@ -15,8 +15,23 @@ namespace Sem_Projekt_Dec_24.Winforms
         public MainForm()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
-    
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            CustomerForm customerForm = new CustomerForm();
+            customerForm.StartPosition = FormStartPosition.CenterScreen;
+            customerForm.Show();
+            this.Hide();
+        }
+
+        private void btnEmployee_Click(object sender, EventArgs e)
+        {
+            EmployeeForm employeeForm = new EmployeeForm();
+            employeeForm.StartPosition = FormStartPosition.CenterScreen;
+            employeeForm.Show();
+            this.Hide();
+        }
     }
 }

@@ -42,6 +42,7 @@
             this.btnStorageItemsDelete = new System.Windows.Forms.Button();
             this.btnStorageProductsDelete = new System.Windows.Forms.Button();
             this.btnStorageProductsCreate = new System.Windows.Forms.Button();
+            this.btnStorageGoBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageProducts)).BeginInit();
             this.SuspendLayout();
@@ -158,11 +159,22 @@
             this.btnStorageProductsCreate.Text = "Create";
             this.btnStorageProductsCreate.UseVisualStyleBackColor = true;
             // 
+            // btnStorageGoBack
+            // 
+            this.btnStorageGoBack.Location = new System.Drawing.Point(12, 12);
+            this.btnStorageGoBack.Name = "btnStorageGoBack";
+            this.btnStorageGoBack.Size = new System.Drawing.Size(75, 23);
+            this.btnStorageGoBack.TabIndex = 14;
+            this.btnStorageGoBack.Text = "Go Back";
+            this.btnStorageGoBack.UseVisualStyleBackColor = true;
+            this.btnStorageGoBack.Click += new System.EventHandler(this.btnStorageGoBack_Click);
+            // 
             // StorageCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnStorageGoBack);
             this.Controls.Add(this.btnStorageProductsCreate);
             this.Controls.Add(this.btnStorageProductsDelete);
             this.Controls.Add(this.btnStorageItemsDelete);
@@ -202,5 +214,6 @@
         private System.Windows.Forms.Button btnStorageItemsDelete;
         private System.Windows.Forms.Button btnStorageProductsDelete;
         private System.Windows.Forms.Button btnStorageProductsCreate;
+        private System.Windows.Forms.Button btnStorageGoBack;
     }
 }

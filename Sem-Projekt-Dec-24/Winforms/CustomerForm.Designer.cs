@@ -41,6 +41,8 @@
             // 
             // dgvProducts
             // 
+            this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProducts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.Location = new System.Drawing.Point(1, 132);
             this.dgvProducts.Name = "dgvProducts";
@@ -49,30 +51,31 @@
             // 
             // txtbQuantity
             // 
-            this.txtbQuantity.Location = new System.Drawing.Point(509, 79);
+            this.txtbQuantity.Location = new System.Drawing.Point(503, 76);
             this.txtbQuantity.Name = "txtbQuantity";
             this.txtbQuantity.Size = new System.Drawing.Size(100, 20);
             this.txtbQuantity.TabIndex = 1;
             // 
             // btnContinue
             // 
-            this.btnContinue.Location = new System.Drawing.Point(630, 76);
+            this.btnContinue.Location = new System.Drawing.Point(626, 73);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(75, 23);
             this.btnContinue.TabIndex = 2;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
+            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
             // 
             // txtbEmail
             // 
-            this.txtbEmail.Location = new System.Drawing.Point(368, 79);
+            this.txtbEmail.Location = new System.Drawing.Point(222, 79);
             this.txtbEmail.Name = "txtbEmail";
             this.txtbEmail.Size = new System.Drawing.Size(100, 20);
             this.txtbEmail.TabIndex = 3;
             // 
             // txtbAdress
             // 
-            this.txtbAdress.Location = new System.Drawing.Point(224, 79);
+            this.txtbAdress.Location = new System.Drawing.Point(361, 76);
             this.txtbAdress.Name = "txtbAdress";
             this.txtbAdress.Size = new System.Drawing.Size(100, 20);
             this.txtbAdress.TabIndex = 4;
@@ -80,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(221, 60);
+            this.label1.Location = new System.Drawing.Point(358, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 5;
@@ -89,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(368, 60);
+            this.label2.Location = new System.Drawing.Point(219, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 6;
@@ -98,7 +101,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(509, 60);
+            this.label3.Location = new System.Drawing.Point(500, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 7;

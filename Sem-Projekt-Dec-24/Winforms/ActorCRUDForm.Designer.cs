@@ -47,6 +47,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnActorUpdate = new System.Windows.Forms.Button();
             this.btnActorDelete = new System.Windows.Forms.Button();
+            this.btnActorGoBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@
             // 
             // btnActorCreate
             // 
-            this.btnActorCreate.Location = new System.Drawing.Point(152, 34);
+            this.btnActorCreate.Location = new System.Drawing.Point(139, 63);
             this.btnActorCreate.Name = "btnActorCreate";
             this.btnActorCreate.Size = new System.Drawing.Size(75, 23);
             this.btnActorCreate.TabIndex = 4;
@@ -70,28 +71,28 @@
             // cmbbChooseActor
             // 
             this.cmbbChooseActor.FormattingEnabled = true;
-            this.cmbbChooseActor.Location = new System.Drawing.Point(12, 36);
+            this.cmbbChooseActor.Location = new System.Drawing.Point(12, 65);
             this.cmbbChooseActor.Name = "cmbbChooseActor";
             this.cmbbChooseActor.Size = new System.Drawing.Size(121, 21);
             this.cmbbChooseActor.TabIndex = 7;
             // 
             // txtbActorId
             // 
-            this.txtbActorId.Location = new System.Drawing.Point(12, 99);
+            this.txtbActorId.Location = new System.Drawing.Point(12, 127);
             this.txtbActorId.Name = "txtbActorId";
             this.txtbActorId.Size = new System.Drawing.Size(100, 20);
             this.txtbActorId.TabIndex = 8;
             // 
             // txtbActorEmployeeEmail
             // 
-            this.txtbActorEmployeeEmail.Location = new System.Drawing.Point(152, 96);
+            this.txtbActorEmployeeEmail.Location = new System.Drawing.Point(152, 124);
             this.txtbActorEmployeeEmail.Name = "txtbActorEmployeeEmail";
             this.txtbActorEmployeeEmail.Size = new System.Drawing.Size(100, 20);
             this.txtbActorEmployeeEmail.TabIndex = 9;
             // 
             // txtbActorCustomerAdress
             // 
-            this.txtbActorCustomerAdress.Location = new System.Drawing.Point(152, 274);
+            this.txtbActorCustomerAdress.Location = new System.Drawing.Point(152, 316);
             this.txtbActorCustomerAdress.Name = "txtbActorCustomerAdress";
             this.txtbActorCustomerAdress.Size = new System.Drawing.Size(100, 20);
             this.txtbActorCustomerAdress.TabIndex = 13;
@@ -99,7 +100,7 @@
             // 
             // txtbActorCustomerEmail
             // 
-            this.txtbActorCustomerEmail.Location = new System.Drawing.Point(152, 248);
+            this.txtbActorCustomerEmail.Location = new System.Drawing.Point(152, 290);
             this.txtbActorCustomerEmail.Name = "txtbActorCustomerEmail";
             this.txtbActorCustomerEmail.Size = new System.Drawing.Size(100, 20);
             this.txtbActorCustomerEmail.TabIndex = 14;
@@ -107,14 +108,14 @@
             // 
             // txtbActorShipperName
             // 
-            this.txtbActorShipperName.Location = new System.Drawing.Point(152, 197);
+            this.txtbActorShipperName.Location = new System.Drawing.Point(152, 234);
             this.txtbActorShipperName.Name = "txtbActorShipperName";
             this.txtbActorShipperName.Size = new System.Drawing.Size(100, 20);
             this.txtbActorShipperName.TabIndex = 15;
             // 
             // txtbActorEmployeeLastName
             // 
-            this.txtbActorEmployeeLastName.Location = new System.Drawing.Point(152, 147);
+            this.txtbActorEmployeeLastName.Location = new System.Drawing.Point(152, 176);
             this.txtbActorEmployeeLastName.Name = "txtbActorEmployeeLastName";
             this.txtbActorEmployeeLastName.Size = new System.Drawing.Size(100, 20);
             this.txtbActorEmployeeLastName.TabIndex = 16;
@@ -122,7 +123,7 @@
             // 
             // txtbActorEmployeeFirstName
             // 
-            this.txtbActorEmployeeFirstName.Location = new System.Drawing.Point(152, 121);
+            this.txtbActorEmployeeFirstName.Location = new System.Drawing.Point(152, 150);
             this.txtbActorEmployeeFirstName.Name = "txtbActorEmployeeFirstName";
             this.txtbActorEmployeeFirstName.Size = new System.Drawing.Size(100, 20);
             this.txtbActorEmployeeFirstName.TabIndex = 17;
@@ -130,7 +131,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 83);
+            this.label1.Location = new System.Drawing.Point(9, 111);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 18;
@@ -139,7 +140,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 99);
+            this.label2.Location = new System.Drawing.Point(256, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 19;
@@ -148,7 +149,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(261, 200);
+            this.label3.Location = new System.Drawing.Point(256, 237);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 20;
@@ -157,7 +158,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(263, 255);
+            this.label4.Location = new System.Drawing.Point(256, 297);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 21;
@@ -166,7 +167,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(258, 121);
+            this.label5.Location = new System.Drawing.Point(256, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(106, 13);
             this.label5.TabIndex = 22;
@@ -175,7 +176,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(258, 150);
+            this.label6.Location = new System.Drawing.Point(256, 179);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(107, 13);
             this.label6.TabIndex = 23;
@@ -184,7 +185,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(261, 277);
+            this.label7.Location = new System.Drawing.Point(256, 319);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(86, 13);
             this.label7.TabIndex = 24;
@@ -192,7 +193,7 @@
             // 
             // btnActorUpdate
             // 
-            this.btnActorUpdate.Location = new System.Drawing.Point(233, 34);
+            this.btnActorUpdate.Location = new System.Drawing.Point(220, 63);
             this.btnActorUpdate.Name = "btnActorUpdate";
             this.btnActorUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnActorUpdate.TabIndex = 25;
@@ -201,18 +202,29 @@
             // 
             // btnActorDelete
             // 
-            this.btnActorDelete.Location = new System.Drawing.Point(314, 34);
+            this.btnActorDelete.Location = new System.Drawing.Point(301, 63);
             this.btnActorDelete.Name = "btnActorDelete";
             this.btnActorDelete.Size = new System.Drawing.Size(75, 23);
             this.btnActorDelete.TabIndex = 26;
             this.btnActorDelete.Text = "Delete";
             this.btnActorDelete.UseVisualStyleBackColor = true;
             // 
+            // btnActorGoBack
+            // 
+            this.btnActorGoBack.Location = new System.Drawing.Point(12, 12);
+            this.btnActorGoBack.Name = "btnActorGoBack";
+            this.btnActorGoBack.Size = new System.Drawing.Size(75, 23);
+            this.btnActorGoBack.TabIndex = 27;
+            this.btnActorGoBack.Text = "Go Back";
+            this.btnActorGoBack.UseVisualStyleBackColor = true;
+            this.btnActorGoBack.Click += new System.EventHandler(this.btnActorGoBack_Click);
+            // 
             // ActorCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnActorGoBack);
             this.Controls.Add(this.btnActorDelete);
             this.Controls.Add(this.btnActorUpdate);
             this.Controls.Add(this.label7);
@@ -260,5 +272,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnActorUpdate;
         private System.Windows.Forms.Button btnActorDelete;
+        private System.Windows.Forms.Button btnActorGoBack;
     }
 }

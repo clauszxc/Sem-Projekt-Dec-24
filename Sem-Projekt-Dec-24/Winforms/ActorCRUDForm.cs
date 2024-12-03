@@ -32,6 +32,12 @@ namespace Sem_Projekt_Dec_24.Winforms
 
         }
 
-    
+        private void btnActorGoBack_Click(object sender, EventArgs e)
+        {
+            EmployeeForm employeeForm = new EmployeeForm();
+            employeeForm.StartPosition = FormStartPosition.CenterScreen;
+            employeeForm.Show();
+            this.Hide();
+        }
     }
 }
