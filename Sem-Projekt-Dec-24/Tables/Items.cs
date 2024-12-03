@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sem_Projekt_Dec_24.Tables
 {
-    internal class Items
+    public class Items
     {
         public int ItemId { get; set; }
         public string ItemName { get; set; }
