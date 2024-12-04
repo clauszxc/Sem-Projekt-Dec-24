@@ -186,6 +186,33 @@ namespace Sem_Projekt_Dec_24.Data
             }
             return productList;
         }
+        public List<Items> GetItems()
+        {
+            List<Items> itemList = new List<Items>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Items";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Items e = new Items(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetInt32(3)
+                            );
+
+                            itemList.Add(e);
+                        }
+                    }
+                }
+            }
+            return itemList;
+        }
 
         public List<Orders> GetOrders()
         {
