@@ -28,6 +28,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             //string connectionString = "Server=localhost;Database=SemProjectDB;Encryption=Optional;TrustServerCertificate=true;";
             string connectionString = "Server=localhost;Database=SemProjectDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
+
             _dbManager = new DatabaseManager(connectionString);
 
             LoadProducts();
@@ -156,18 +157,31 @@ namespace Sem_Projekt_Dec_24.Winforms
 
             }
 
-            //if (string.IsNullOrWhiteSpace(txtbAdress.Text) || string.IsNullOrWhiteSpace(txtbEmail.Text) || string.IsNullOrWhiteSpace(txtbQuantity.Text))
-            //{
-            //    MessageBox.Show("All fields must be filled in before proceeding.");
-            //    return;
-            //}
+            var selectedInvoices = GetSelectedInvoicesFromGrid();
+            if (selectedInvoices.Count == 0)
+            {
+                MessageBox.Show("Please select at least one product or order.");
+                return;
+            }
 
-            CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm();
+            CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm(selectedInvoices);
             customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
             customerConfirmationForm.Show();
             this.Hide();
-
             ClearInputFields();
+        }
+
+        private List<OrderInvoices> GetSelectedInvoicesFromGrid()
+        {
+            var selectedInvoices = new List<OrderInvoices>();
+            foreach (DataGridViewRow row in dgvProducts.SelectedRows)
+            {
+                if (row.DataBoundItem is OrderInvoices invoice)
+                {
+                    selectedInvoices.Add(invoice);
+                }
+            }
+            return selectedInvoices;
 
         }
 
