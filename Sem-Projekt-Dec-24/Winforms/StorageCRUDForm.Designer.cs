@@ -50,97 +50,88 @@
             // dgvStorageItems
             // 
             this.dgvStorageItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStorageItems.Location = new System.Drawing.Point(2, 302);
-            this.dgvStorageItems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvStorageItems.Location = new System.Drawing.Point(1, 196);
             this.dgvStorageItems.Name = "dgvStorageItems";
             this.dgvStorageItems.RowHeadersWidth = 62;
-            this.dgvStorageItems.Size = new System.Drawing.Size(579, 391);
+            this.dgvStorageItems.Size = new System.Drawing.Size(386, 254);
             this.dgvStorageItems.TabIndex = 0;
             // 
             // dgvStorageProducts
             // 
             this.dgvStorageProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStorageProducts.Location = new System.Drawing.Point(576, 302);
-            this.dgvStorageProducts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvStorageProducts.Location = new System.Drawing.Point(384, 196);
             this.dgvStorageProducts.Name = "dgvStorageProducts";
             this.dgvStorageProducts.RowHeadersWidth = 62;
-            this.dgvStorageProducts.Size = new System.Drawing.Size(624, 391);
+            this.dgvStorageProducts.Size = new System.Drawing.Size(416, 254);
             this.dgvStorageProducts.TabIndex = 1;
             // 
             // btnStorageItemsUpdate
             // 
-            this.btnStorageItemsUpdate.Location = new System.Drawing.Point(216, 158);
-            this.btnStorageItemsUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStorageItemsUpdate.Location = new System.Drawing.Point(144, 103);
             this.btnStorageItemsUpdate.Name = "btnStorageItemsUpdate";
-            this.btnStorageItemsUpdate.Size = new System.Drawing.Size(112, 35);
+            this.btnStorageItemsUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnStorageItemsUpdate.TabIndex = 2;
             this.btnStorageItemsUpdate.Text = "Update";
             this.btnStorageItemsUpdate.UseVisualStyleBackColor = true;
+            this.btnStorageItemsUpdate.Click += new System.EventHandler(this.btnStorageItemsUpdate_Click);
             // 
             // btnStorageProductsUpdate
             // 
-            this.btnStorageProductsUpdate.Location = new System.Drawing.Point(855, 158);
-            this.btnStorageProductsUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStorageProductsUpdate.Location = new System.Drawing.Point(570, 103);
             this.btnStorageProductsUpdate.Name = "btnStorageProductsUpdate";
-            this.btnStorageProductsUpdate.Size = new System.Drawing.Size(112, 35);
+            this.btnStorageProductsUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnStorageProductsUpdate.TabIndex = 3;
             this.btnStorageProductsUpdate.Text = "Update";
             this.btnStorageProductsUpdate.UseVisualStyleBackColor = true;
+            this.btnStorageProductsUpdate.Click += new System.EventHandler(this.btnStorageProductsUpdate_Click);
             // 
             // txtbStorageItemsCategory
             // 
-            this.txtbStorageItemsCategory.Location = new System.Drawing.Point(18, 235);
-            this.txtbStorageItemsCategory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtbStorageItemsCategory.Location = new System.Drawing.Point(12, 153);
             this.txtbStorageItemsCategory.Name = "txtbStorageItemsCategory";
-            this.txtbStorageItemsCategory.Size = new System.Drawing.Size(148, 26);
+            this.txtbStorageItemsCategory.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsCategory.TabIndex = 4;
             // 
             // txtbStorageProductsId
             // 
-            this.txtbStorageProductsId.Location = new System.Drawing.Point(1032, 89);
-            this.txtbStorageProductsId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtbStorageProductsId.Location = new System.Drawing.Point(688, 58);
             this.txtbStorageProductsId.Name = "txtbStorageProductsId";
-            this.txtbStorageProductsId.Size = new System.Drawing.Size(148, 26);
+            this.txtbStorageProductsId.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsId.TabIndex = 5;
             // 
             // txtbStorageItemsId
             // 
-            this.txtbStorageItemsId.Location = new System.Drawing.Point(20, 89);
-            this.txtbStorageItemsId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtbStorageItemsId.Location = new System.Drawing.Point(13, 58);
             this.txtbStorageItemsId.Name = "txtbStorageItemsId";
-            this.txtbStorageItemsId.Size = new System.Drawing.Size(148, 26);
+            this.txtbStorageItemsId.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsId.TabIndex = 6;
             // 
             // txtbStorageItemsName
             // 
-            this.txtbStorageItemsName.Location = new System.Drawing.Point(20, 163);
-            this.txtbStorageItemsName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtbStorageItemsName.Location = new System.Drawing.Point(13, 106);
             this.txtbStorageItemsName.Name = "txtbStorageItemsName";
-            this.txtbStorageItemsName.Size = new System.Drawing.Size(148, 26);
+            this.txtbStorageItemsName.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsName.TabIndex = 7;
             // 
             // txtbStorageProductsName
             // 
-            this.txtbStorageProductsName.Location = new System.Drawing.Point(1032, 163);
-            this.txtbStorageProductsName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtbStorageProductsName.Location = new System.Drawing.Point(688, 106);
             this.txtbStorageProductsName.Name = "txtbStorageProductsName";
-            this.txtbStorageProductsName.Size = new System.Drawing.Size(148, 26);
+            this.txtbStorageProductsName.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsName.TabIndex = 8;
             // 
             // txtbStorageProductsCategory
             // 
-            this.txtbStorageProductsCategory.Location = new System.Drawing.Point(1032, 235);
-            this.txtbStorageProductsCategory.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtbStorageProductsCategory.Location = new System.Drawing.Point(688, 153);
             this.txtbStorageProductsCategory.Name = "txtbStorageProductsCategory";
-            this.txtbStorageProductsCategory.Size = new System.Drawing.Size(148, 26);
+            this.txtbStorageProductsCategory.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsCategory.TabIndex = 9;
             // 
             // btnStorageItemsCreate
             // 
-            this.btnStorageItemsCreate.Location = new System.Drawing.Point(216, 89);
-            this.btnStorageItemsCreate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStorageItemsCreate.Location = new System.Drawing.Point(144, 58);
             this.btnStorageItemsCreate.Name = "btnStorageItemsCreate";
-            this.btnStorageItemsCreate.Size = new System.Drawing.Size(112, 35);
+            this.btnStorageItemsCreate.Size = new System.Drawing.Size(75, 23);
             this.btnStorageItemsCreate.TabIndex = 10;
             this.btnStorageItemsCreate.Text = "Create";
             this.btnStorageItemsCreate.UseVisualStyleBackColor = true;
@@ -148,40 +139,36 @@
             // 
             // btnStorageItemsDelete
             // 
-            this.btnStorageItemsDelete.Location = new System.Drawing.Point(216, 231);
-            this.btnStorageItemsDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStorageItemsDelete.Location = new System.Drawing.Point(144, 150);
             this.btnStorageItemsDelete.Name = "btnStorageItemsDelete";
-            this.btnStorageItemsDelete.Size = new System.Drawing.Size(112, 35);
+            this.btnStorageItemsDelete.Size = new System.Drawing.Size(75, 23);
             this.btnStorageItemsDelete.TabIndex = 11;
             this.btnStorageItemsDelete.Text = "Delete";
             this.btnStorageItemsDelete.UseVisualStyleBackColor = true;
             // 
             // btnStorageProductsDelete
             // 
-            this.btnStorageProductsDelete.Location = new System.Drawing.Point(855, 232);
-            this.btnStorageProductsDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStorageProductsDelete.Location = new System.Drawing.Point(570, 151);
             this.btnStorageProductsDelete.Name = "btnStorageProductsDelete";
-            this.btnStorageProductsDelete.Size = new System.Drawing.Size(112, 35);
+            this.btnStorageProductsDelete.Size = new System.Drawing.Size(75, 23);
             this.btnStorageProductsDelete.TabIndex = 12;
             this.btnStorageProductsDelete.Text = "Delete";
             this.btnStorageProductsDelete.UseVisualStyleBackColor = true;
             // 
             // btnStorageProductsCreate
             // 
-            this.btnStorageProductsCreate.Location = new System.Drawing.Point(855, 89);
-            this.btnStorageProductsCreate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStorageProductsCreate.Location = new System.Drawing.Point(570, 58);
             this.btnStorageProductsCreate.Name = "btnStorageProductsCreate";
-            this.btnStorageProductsCreate.Size = new System.Drawing.Size(112, 35);
+            this.btnStorageProductsCreate.Size = new System.Drawing.Size(75, 23);
             this.btnStorageProductsCreate.TabIndex = 13;
             this.btnStorageProductsCreate.Text = "Create";
             this.btnStorageProductsCreate.UseVisualStyleBackColor = true;
             // 
             // btnStorageGoBack
             // 
-            this.btnStorageGoBack.Location = new System.Drawing.Point(18, 18);
-            this.btnStorageGoBack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnStorageGoBack.Location = new System.Drawing.Point(12, 12);
             this.btnStorageGoBack.Name = "btnStorageGoBack";
-            this.btnStorageGoBack.Size = new System.Drawing.Size(112, 35);
+            this.btnStorageGoBack.Size = new System.Drawing.Size(75, 23);
             this.btnStorageGoBack.TabIndex = 14;
             this.btnStorageGoBack.Text = "Go Back";
             this.btnStorageGoBack.UseVisualStyleBackColor = true;
@@ -189,9 +176,9 @@
             // 
             // StorageCRUDForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 692);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnStorageGoBack);
             this.Controls.Add(this.btnStorageProductsCreate);
             this.Controls.Add(this.btnStorageProductsDelete);
@@ -207,7 +194,6 @@
             this.Controls.Add(this.btnStorageItemsUpdate);
             this.Controls.Add(this.dgvStorageProducts);
             this.Controls.Add(this.dgvStorageItems);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "StorageCRUDForm";
             this.Text = "StorageCRUDForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageItems)).EndInit();
