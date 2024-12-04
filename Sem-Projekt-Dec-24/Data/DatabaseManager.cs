@@ -20,6 +20,24 @@ namespace Sem_Projekt_Dec_24.Data
         {
             _connectionString = connectionString;
         }
+        public void AddEmployee(Employees employee)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO Employees (EmployeeId, EmployeeEmail, EmployeeFirstName, EmployeeLastName) " +
+                    "VALUES (@EmployeeId, @EmployeeEmail, @EmployeeFirstName, @EmployeeLastName)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@EmployeeId", employee.EmployeeId);
+                    command.Parameters.AddWithValue("@EmployeeEmail", employee.EmployeeEmail);
+                    command.Parameters.AddWithValue("@EmployeeFirstName", employee.EmployeeFirstName);
+                    command.Parameters.AddWithValue("@EmployeeLastName", employee.EmployeeLastName);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
         public void AddCustomer(Customers customer)
         {
@@ -75,6 +93,38 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+        public void AddItemsToStorage(Items items)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO Items (ItemId, ItemName, ItemCategory, ItemStock)" +
+                    "VALUES (@ItemId, @ItemName, @ItemCategory, @ItemStock";
+                using (SqlCommand command = new SqlCommand(_connectionString, connection))
+                {
+                    command.Parameters.AddWithValue("@ItemId", items.ItemId);
+                    command.Parameters.AddWithValue("@ItemName", items.ItemName);
+                    command.Parameters.AddWithValue("@ItemCategory", items.ItemCategory);
+                }
+            }
+        }
+        public void AddProductToStorage(Products products)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO Products(ProductId, ProductName, ProductCategory, ProductStock" +
+                    "VALUES (@ProductId, @ProductName, @ProductCategory, @ProductStock)";
+                using (SqlCommand command = new SqlCommand(_connectionString, connection))
+                {
+                    command.Parameters.AddWithValue("@ProductId", products.ProductId);
+                    command.Parameters.AddWithValue("@ProductName", products.ProductName);
+                    command.Parameters.AddWithValue("@ProductCategory", products.ProductName);
+                }
+            }
+        }
         public List<Products> GetProducts()
         {
             List<Products> productList = new List<Products>();
@@ -102,6 +152,7 @@ namespace Sem_Projekt_Dec_24.Data
             }
             return productList;
         }
+
         public List<Customers> GetCustomers()
         {
             List<Customers> customerList = new List<Customers>();
@@ -184,36 +235,34 @@ namespace Sem_Projekt_Dec_24.Data
             return orderInvoiceList;
         }
 
-        public void AddItemsToStorage(Items items)
+        public void DeleteEmployee(Employees employee)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string query =
-                    "INSERT INTO Items (ItemId, ItemName, ItemCategory, ItemStock)" +
-                    "VALUES (@ItemId, @ItemName, @ItemCategory, @ItemStock";
-                using (SqlCommand command = new SqlCommand(_connectionString, connection))
+                    "DELETE FROM Employees " +
+                    "WHERE EmployeeId = @EmployeeId";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ItemId", items.ItemId);
-                    command.Parameters.AddWithValue("@ItemName", items.ItemName);
-                    command.Parameters.AddWithValue("@ItemCategory", items.ItemCategory);
+                    command.Parameters.AddWithValue("@EmployeeId", employee.EmployeeId.ToString());
+                    command.ExecuteNonQuery();
                 }
             }
         }
 
-        public void AddProductToStorage(Products products)
+        public void DeleteCustomer(Customers customer)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string query =
-                    "INSERT INTO Products(ProductId, ProductName, ProductCategory, ProductStock" +
-                    "VALUES (@ProductId, @ProductName, @ProductCategory, @ProductStock)";
-                using (SqlCommand command = new SqlCommand(_connectionString,connection))
+                    "DELETE FROM Customers " +
+                    "WHERE EmployeeId = @CustomerId";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ProductId", products.ProductId);
-                    command.Parameters.AddWithValue("@ProductName", products.ProductName);
-                    command.Parameters.AddWithValue("@ProductCategory", products.ProductName);
+                    command.Parameters.AddWithValue("@CustomerId", customer.CustomerId.ToString());
+                    command.ExecuteNonQuery();
                 }
             }
         }
