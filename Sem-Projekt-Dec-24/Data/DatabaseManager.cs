@@ -20,6 +20,8 @@ namespace Sem_Projekt_Dec_24.Data
         {
             _connectionString = connectionString;
         }
+
+        // Create methods for actors
         public void AddEmployee(Employees employee)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -56,6 +58,8 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+
+        // Create methods for storage
         public void AddOrder(Orders order)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -125,6 +129,36 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+
+        // Read methods for actors
+        public List<Customers> GetCustomers()
+        {
+            List<Customers> customerList = new List<Customers>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Customers";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Customers e = new Customers(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2)
+                            );
+
+                            customerList.Add(e);
+                        }
+                    }
+                }
+            }
+            return customerList;
+        }
+
+        // Read methods for storage
         public List<Products> GetProducts()
         {
             List<Products> productList = new List<Products>();
@@ -153,32 +187,6 @@ namespace Sem_Projekt_Dec_24.Data
             return productList;
         }
 
-        public List<Customers> GetCustomers()
-        {
-            List<Customers> customerList = new List<Customers>();
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string query = "SELECT * FROM Customers";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Customers e = new Customers(
-                                reader.GetInt32(0),
-                                reader.GetString(1),
-                                reader.GetString(2)
-                            );
-
-                            customerList.Add(e);
-                        }
-                    }
-                }
-            }
-            return customerList;
-        }
         public List<Orders> GetOrders()
         {
             List<Orders> orderList = new List<Orders>();
@@ -235,6 +243,57 @@ namespace Sem_Projekt_Dec_24.Data
             return orderInvoiceList;
         }
 
+        // Update methods for actors
+        public void UpdateEmployee(string employeeEmail, string employeeFirstName, string employeeLastName)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Employees SET EmployeeEmail = @EmployeeEmail, EmployeeFirstName = @EmployeeFirstName, EmployeeLastName = @EmployeeLastName" +
+                                "WHERE EmployeeId = @EmployeeId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Employees e = new Employees(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetString(3)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateCustomer(string customerEmail, string customerAdress)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Customers SET CustomerEmail = @CustomerEmail, CustomerAdress = @CustomerAdress" +
+                                "WHERE CustomerId = @CustomerId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Customers e = new Customers(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // Delete methods for Actors
         public void DeleteEmployee(Employees employee)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
