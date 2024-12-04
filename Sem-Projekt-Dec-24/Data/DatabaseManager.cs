@@ -12,6 +12,7 @@ namespace Sem_Projekt_Dec_24.Data
 {
     public class DatabaseManager
     {
+
         private readonly string _connectionString;
         public BindingList<Products> ProductList { get; set; } = new BindingList<Products>();
 
@@ -102,6 +103,33 @@ namespace Sem_Projekt_Dec_24.Data
             }
             return productList;
         }
+        public List<Items> GetItems()
+        {
+            List<Items> itemList = new List<Items>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Items";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Items e = new Items(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetInt32(3)
+                            );
+
+                            itemList.Add(e);
+                        }
+                    }
+                }
+            }
+            return itemList;
+        }
         public List<Customers> GetCustomers()
         {
             List<Customers> customerList = new List<Customers>();
@@ -183,7 +211,7 @@ namespace Sem_Projekt_Dec_24.Data
             }
             return orderInvoiceList;
         }
-
+        // Add Item to Storage Method
         public void AddItemsToStorage(Items items)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -200,7 +228,7 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
-
+        // Add Product to Storage Method
         public void AddProductToStorage(Products products)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
