@@ -110,6 +110,7 @@ namespace Sem_Projekt_Dec_24.Data
                     command.Parameters.AddWithValue("@ItemId", items.ItemId);
                     command.Parameters.AddWithValue("@ItemName", items.ItemName);
                     command.Parameters.AddWithValue("@ItemCategory", items.ItemCategory);
+                    command.Parameters.AddWithValue("@ItemStock", 0);
                 }
             }
         }
@@ -126,6 +127,7 @@ namespace Sem_Projekt_Dec_24.Data
                     command.Parameters.AddWithValue("@ProductId", products.ProductId);
                     command.Parameters.AddWithValue("@ProductName", products.ProductName);
                     command.Parameters.AddWithValue("@ProductCategory", products.ProductName);
+                    command.Parameters.AddWithValue("@ProductStock", 0);
                 }
             }
         }
@@ -318,7 +320,55 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
-
+        // Update Methods for Storage
+        public void UpdateItemsInStorage(int txtbStorageItemsIdInt, string txtbStorageItemsNameString, string txtbStorageItemsCategoryString, int itemStockPre)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Items SET ItemName = @ItemName, ItemCategory = @ItemCategory"+
+                                "WHERE ItemId = @ItemId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Items e = new Items(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetInt32(3)
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateProductsInStorage(int productId, string productName, string productCategory)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Products SET ProductName = @ProductName, ProductCategory = @ProductCategory" +
+                                "WHERE ProductId = @ProductId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Products e = new Products(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetInt32(3)
+                            );
+                        }
+                    }
+                }
+            }
+        }
 
         // Delete methods for Actors
         public void DeleteEmployee(Employees employee)
@@ -352,5 +402,38 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+        // Delete Methods for Storage
+        public void DeleteItemsInStorage(Items items)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "DELETE FROM Items " +
+                    "WHERE ItemId = @ItemId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ItemId", items.ItemId.ToString());
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        public void DeleteProductsInStorage(Products products)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "DELETE FROM Products " +
+                    "WHERE ProductId = @ProductId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ProductId", products.ProductId.ToString());
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
     }
 }

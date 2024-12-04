@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ namespace Sem_Projekt_Dec_24.Winforms
 {
     public partial class StorageCRUDForm : Form
     {
+        private readonly string _connectionString;
         private readonly DatabaseManager _dbManager;
         public BindingList<Products> ProductList { get; set; } = new BindingList<Products>();
         public BindingList<Items> ItemList { get; set; } = new BindingList<Items>();
@@ -86,7 +89,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 {
                     txtbStorageItemsIdInt = ItemList.Count > 0 ? ItemList.Max(c => c.ItemId) + 1 : 1;
 
-                    Items newItems = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, 10);
+                    Items newItems = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, 0);
 
                     ItemList.Add(newItems);
                     _dbManager.AddItemsToStorage(newItems);
@@ -96,6 +99,36 @@ namespace Sem_Projekt_Dec_24.Winforms
                 }
             }
         }
+
+        // Update Item
+        private void btnStorageItemsUpdate_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query =
+                   "SELECT ItemStock FROM Items" +
+                   "WHERE ItemId = @ItemId";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int txtbStorageItemsIdInt = Convert.ToInt32(txtbStorageItemsId.Text);
+                    string txtbStorageItemsNameString = txtbStorageItemsName.Text;
+                    string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
+                    int itemStock = Convert.ToInt32(reader["ItemStock"]);
+
+                    _dbManager.UpdateItemsInStorage(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, itemStock);
+
+                }
+                reader.Close();
+            }
+        }
+
+        // Delete Item
+
+
 
         //Create Product
         private void btnStorageProductCreate_Click(object sender, EventArgs e)
@@ -119,7 +152,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 {
                     txtbStorageProductIdInt = ProductList.Count > 0 ? ProductList.Max(c => c.ProductId) + 1 : 1;
 
-                    Items newItems = new Items(txtbStorageProductIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, 10);
+                    Items newItems = new Items(txtbStorageProductIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, 0);
 
                     ItemList.Add(newItems);
                     _dbManager.AddItemsToStorage(newItems);
@@ -130,6 +163,35 @@ namespace Sem_Projekt_Dec_24.Winforms
             }
 
         }
+
+        // Update Product
+        private void btnStorageProductsUpdate_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query =
+                   "SELECT ProductStock FROM Products" +
+                   "WHERE ProductId = @ItemId";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int txtbStorageProductsIdInt = Convert.ToInt32(txtbStorageItemsId.Text);
+                    string txtbStorageProductsNameString = txtbStorageItemsName.Text;
+                    string txtbStorageProductsCategoryString = txtbStorageItemsCategory.Text;
+                    int productStock = Convert.ToInt32(reader["ProductStock"]);
+
+                    _dbManager.UpdateItemsInStorage(txtbStorageProductsIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, productStock);
+
+                }
+                reader.Close();
+            }
+        }
+        // Delete Product
+
+
     }
 
 }
