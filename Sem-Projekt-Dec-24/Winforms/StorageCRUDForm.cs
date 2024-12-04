@@ -97,7 +97,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             }
         }
 
-        //Create Producct
+        //Create Product
         private void btnStorageProductCreate_Click(object sender, EventArgs e)
         {
             string txtbStorageProductsIdString = txtbStorageProductsId.Text;
