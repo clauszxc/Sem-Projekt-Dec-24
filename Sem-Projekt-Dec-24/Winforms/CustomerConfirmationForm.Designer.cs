@@ -51,6 +51,7 @@
             this.btnCreateOrderInvoice.TabIndex = 1;
             this.btnCreateOrderInvoice.Text = "Create Order Invoice";
             this.btnCreateOrderInvoice.UseVisualStyleBackColor = true;
+            this.btnCreateOrderInvoice.Click += new System.EventHandler(this.btnCreateOrderInvoice_Click);
             // 
             // btnNewOrder
             // 

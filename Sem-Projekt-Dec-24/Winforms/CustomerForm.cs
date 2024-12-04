@@ -162,10 +162,10 @@ namespace Sem_Projekt_Dec_24.Winforms
             //    return;
             //}
 
-            //CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm();
-            //customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
-            //customerConfirmationForm.Show();
-            //this.Hide();
+            CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm();
+            customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
+            customerConfirmationForm.Show();
+            this.Hide();
 
             ClearInputFields();
 
