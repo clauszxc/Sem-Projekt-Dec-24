@@ -77,7 +77,6 @@
             this.txtbEmail.Name = "txtbEmail";
             this.txtbEmail.Size = new System.Drawing.Size(148, 26);
             this.txtbEmail.TabIndex = 3;
-            this.txtbEmail.TextChanged += new System.EventHandler(this.txtbEmail_TextChanged);
             // 
             // txtbAdress
             // 
