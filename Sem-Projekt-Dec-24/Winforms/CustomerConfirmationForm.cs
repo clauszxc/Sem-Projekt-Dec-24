@@ -14,6 +14,7 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.Kernel.Colors;
 using iText.Kernel.Pdf.Canvas.Draw;
+using Sem_Projekt_Dec_24.Tables;
 
 namespace Sem_Projekt_Dec_24.Winforms
 {
@@ -43,7 +44,7 @@ namespace Sem_Projekt_Dec_24.Winforms
 
         public void CreateInvoicePdf()
         {
-            
+
             string fileName = "Invoice.pdf";
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
 
@@ -58,20 +59,34 @@ namespace Sem_Projekt_Dec_24.Winforms
                     .SetFontColor(ColorConstants.BLACK);
                 document.Add(header);
 
-                Paragraph date = new Paragraph($"Date: {DateTime.Now.ToString("dd-mm-yyyy")}")
+                Paragraph date = new Paragraph($"Date: {DateTime.Now:dd-MM-yyyy}")
                     .SetFontSize(14)
                     .SetTextAlignment(TextAlignment.LEFT)
                     .SetMarginTop(20);
                 document.Add(date);
 
+
                 LineSeparator separator = new LineSeparator(new SolidLine(1));
                 document.Add(separator);
 
-                Paragraph content = new Paragraph("")
-                    .SetFontSize(12)
-                    .SetMarginTop(10);
-                document.Add(content);
 
+                Table table = new Table(5); // 5 kolonner: Faktura-ID, Kunde-ID, Produkt-ID, Pris, Mængde
+                table.AddHeaderCell("Invoice ID");
+                table.AddHeaderCell("Customer ID");
+                table.AddHeaderCell("Product ID");
+                table.AddHeaderCell("Price");
+                table.AddHeaderCell("Quantity");
+
+                foreach (var invoice in SelectedInvoices)
+                {
+                    table.AddCell(invoice.OrderInvoiceId.ToString());
+                    table.AddCell(invoice.CustomerId.ToString());
+                    table.AddCell(invoice.ProductId.ToString());
+                    table.AddCell(invoice.Price.ToString("C"));
+                    table.AddCell(invoice.Quantity.ToString());
+                }
+
+                document.Add(table);
 
                 Paragraph footer = new Paragraph("Thank you for shopping with us!")
                     .SetFontSize(14)
@@ -87,5 +102,16 @@ namespace Sem_Projekt_Dec_24.Winforms
         {
             CreateInvoicePdf();
         }
+
+
+
+        private List<OrderInvoices> SelectedInvoices;
+
+        public CustomerConfirmationForm(List<OrderInvoices> selectedInvoices)
+            {
+                InitializeComponent();
+                SelectedInvoices = selectedInvoices;
+            }
+        
     }
 }
