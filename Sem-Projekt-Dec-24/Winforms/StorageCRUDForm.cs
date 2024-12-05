@@ -26,7 +26,7 @@ namespace Sem_Projekt_Dec_24.Winforms
         public StorageCRUDForm()
         {
             InitializeComponent();
-            string connectionString = "Server=localhost;Database=SemProjectDB;Trusted_Connection=True;TrustServerCertificate=True;";
+            string connectionString = "Server=mssql2.unoeuro.com;Database=ferrariconnie_dk_db_semprojectdb;User Id=ferrariconnie_dk;Password=bkngcw5BmR6DEx2ep4a3;";
             _dbManager = new DatabaseManager(connectionString);
 
             LoadProducts();
@@ -128,7 +128,31 @@ namespace Sem_Projekt_Dec_24.Winforms
 
         // Delete Item
 
+        private void btnStorageItemsDelete_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query =
+                   "SELECT ItemStock FROM Items" +
+                   "WHERE ItemId = @ItemId";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    int txtbStorageItemsIdInt = Convert.ToInt32(txtbStorageItemsId.Text);
+                string txtbStorageItemsNameString = txtbStorageItemsName.Text;
+                string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
+                int itemStock = Convert.ToInt32(reader["ItemStock"]);
+
+                Items deletedItem = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, itemStock);
+
+                _dbManager.DeleteItemsInStorage(deletedItem);
+                }
+                reader.Close();
+            }
+        }
 
         //Create Product
         private void btnStorageProductCreate_Click(object sender, EventArgs e)
@@ -190,6 +214,34 @@ namespace Sem_Projekt_Dec_24.Winforms
             }
         }
         // Delete Product
+        private void btnStorageProductsDelete_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query =
+                   "SELECT ProductStock FROM Products" +
+                   "WHERE ProductId = @ProductId";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int txtbStorageProductIdInt = Convert.ToInt32(txtbStorageProductsId.Text);
+                    string txtbStorageProductsNameString = txtbStorageProductsName.Text;
+                    string txtbStorageProductsCategoryString = txtbStorageProductsCategory.Text;
+                    int productStock = Convert.ToInt32(reader["ProductStock"]);
+
+                    Products deletedProduct = new Products(txtbStorageProductIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, productStock);
+
+                    _dbManager.DeleteProductsInStorage(deletedProduct);
+                }
+                reader.Close();
+            }
+        }
+
+
+     
 
 
     }
