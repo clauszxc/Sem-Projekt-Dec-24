@@ -25,9 +25,7 @@ namespace Sem_Projekt_Dec_24.Winforms
         {
             InitializeComponent();
 
-            //string connectionString = "Server=localhost;Database=SemProjectDB;Encryption=Optional;TrustServerCertificate=true;";
-            string connectionString = "Server=localhost;Database=SemProjectDB;Trusted_Connection=True;TrustServerCertificate=True;";
-
+            string connectionString = "Server=mssql2.unoeuro.com;Database=ferrariconnie_dk_db_semprojectdb;User Id=ferrariconnie_dk;Password=bkngcw5BmR6DEx2ep4a3;";
 
             _dbManager = new DatabaseManager(connectionString);
 
@@ -75,100 +73,87 @@ namespace Sem_Projekt_Dec_24.Winforms
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            int customerId = 1;
+            try
+            {
+                int customerId = GetOrCreateCustomer();
+                int orderId = GetOrCreateOrder(customerId);
+                CreateOrderInvoice(customerId, orderId);
+
+                var selectedInvoices = GetSelectedInvoicesFromGrid();
+                if (selectedInvoices.Count == 0)
+                {
+                    MessageBox.Show("Please select at least one product or order.");
+                    return;
+                }
+
+                CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm(selectedInvoices);
+                customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
+                customerConfirmationForm.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+            finally
+            {
+                ClearInputFields();
+            }
+        }
+
+        private int GetOrCreateCustomer()
+        {
             string customerAdress = txtbAdress.Text;
             string customerEmail = txtbEmail.Text;
 
-            for (int i = 0; i < CustomerList.Count; i++)
+            var existingCustomer = CustomerList.FirstOrDefault(c => c.CustomerEmail == customerEmail);
+            if (existingCustomer != null)
             {
-                if (CustomerList[i].CustomerEmail == customerEmail)
-                {
-                    customerId = CustomerList[i].CustomerId;
-                    ClearInputFields();
-                    return;
-                }
-                else
-                {
-                    customerId = CustomerList.Count > 0 ? CustomerList.Max(c => c.CustomerId) + 1 : 1;
-
-                    Customers newCustomer = new Customers(customerId, customerEmail, customerAdress);
-
-                    CustomerList.Add(newCustomer);
-                    _dbManager.AddCustomer(newCustomer);
-
-                    ClearInputFields();
-                    return;
-                }
-
+                return existingCustomer.CustomerId;
             }
 
-            int orderId = 1;
-            int shipperId = 1;
+            int newCustomerId = CustomerList.Count > 0 ? CustomerList.Max(c => c.CustomerId) + 1 : 1;
+            var newCustomer = new Customers(newCustomerId, customerEmail, customerAdress);
+
+            CustomerList.Add(newCustomer);
+            _dbManager.AddCustomer(newCustomer);
+
+            return newCustomerId;
+        }
+        private int GetOrCreateOrder(int customerId)
+        {
             string orderStatus = "Ongoing";
+            int shipperId = 1;
 
-            for (int i = 0; i < OrderList.Count; i++)
+            var existingOrder = OrderList.FirstOrDefault(o => o.CustomerId == customerId && o.OrderStatus == orderStatus);
+            if (existingOrder != null)
             {
-                if (OrderList[i].OrderId == orderId)
-                {
-                    orderId = OrderList[i].OrderId;
-                    ClearInputFields();
-                    return;
-                }
-                else
-                {
-                    orderId = OrderList.Count > 0 ? OrderList.Max(c => c.OrderId) + 1 : 1;
-
-                    Orders newOrder = new Orders(orderId, customerId, shipperId, orderStatus);
-
-                    OrderList.Add(newOrder);
-                    _dbManager.AddOrder(newOrder);
-
-                    ClearInputFields();
-                    return;
-                }
-
+                return existingOrder.OrderId;
             }
 
-            int orderInvoiceId = 1;
+            int newOrderId = OrderList.Count > 0 ? OrderList.Max(c => c.OrderId) + 1 : 1;
+            var newOrder = new Orders(newOrderId, customerId, shipperId, orderStatus);
+
+            OrderList.Add(newOrder);
+            _dbManager.AddOrder(newOrder);
+
+            return newOrderId;
+        }
+
+        private void CreateOrderInvoice(int  customerId, int orderId)
+        {
             int productId = 1;
-            decimal price = 1;
-            int quantity = Convert.ToInt32(txtbQuantity.Text);
-
-            for (int i = 0; i < OrderInvoiceList.Count; i++)
+            decimal price = 100;
+            if (!int.TryParse(txtbQuantity.Text, out int quantity) || quantity <= 0)
             {
-                if (OrderInvoiceList[i].OrderInvoiceId == orderInvoiceId)
-                {
-                    orderInvoiceId = OrderInvoiceList[i].OrderInvoiceId;
-                    ClearInputFields();
-                    return;
-                }
-                else
-                {
-                    orderId = OrderInvoiceList.Count > 0 ? OrderInvoiceList.Max(c => c.OrderInvoiceId) + 1 : 1;
-
-                    OrderInvoices newOrderInvoice = new OrderInvoices(orderInvoiceId, customerId, productId, price, quantity);
-
-                    OrderInvoiceList.Add(newOrderInvoice);
-                    _dbManager.AddOrderInvoice(newOrderInvoice);
-
-                    ClearInputFields();
-                    return;
-                }
-
+                throw new InvalidOperationException("Please enter valid quantity.");
             }
 
-            var selectedInvoices = GetSelectedInvoicesFromGrid();
-            if (selectedInvoices.Count == 0)
-            {
-                MessageBox.Show("Please select at least one product or order.");
-                return;
-            }
+            int newOrderInvoiceId = OrderInvoiceList.Count > 0 ? OrderInvoiceList.Max(oi => oi.OrderInvoiceId) + 1 : 1;
+            var newOrderInvoice = new OrderInvoices(newOrderInvoiceId, customerId, productId, price, quantity);
 
-            CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm(selectedInvoices);
-            customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
-            customerConfirmationForm.Show();
-            this.Hide();
-            ClearInputFields();
+            OrderInvoiceList.Add(newOrderInvoice);
+            _dbManager.AddOrderInvoice(newOrderInvoice);
         }
 
         private List<OrderInvoices> GetSelectedInvoicesFromGrid()
@@ -182,8 +167,6 @@ namespace Sem_Projekt_Dec_24.Winforms
                 }
             }
             return selectedInvoices;
-
         }
-
     }
 }
