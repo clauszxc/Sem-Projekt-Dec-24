@@ -70,22 +70,23 @@ namespace Sem_Projekt_Dec_24.Data
                     "VALUES (@OrderId, @CustomerId, @ShipperId, @OrderStatus)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@CustomerId", order.OrderId);
-                    command.Parameters.AddWithValue("@CustomerEmail", order.CustomerId);
-                    command.Parameters.AddWithValue("@CustomerAdress", order.ShipperId);
-                    command.Parameters.AddWithValue("@CustomerAdress", order.OrderStatus);
+                    command.Parameters.AddWithValue("@OrderId", order.OrderId);
+                    command.Parameters.AddWithValue("@CustomerId", order.CustomerId);
+                    command.Parameters.AddWithValue("@ShipperId", order.ShipperId);
+                    command.Parameters.AddWithValue("@OrderStatus", order.OrderStatus);
                     command.ExecuteNonQuery();
                 }
             }
         }
+
         public void AddOrderInvoice(OrderInvoices orderInvoice)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string query =
-                    "INSERT INTO OrderInvoice (OrderInvoiceId, CustomerId, ProductId, Price, Quantity) " +
-                    "VALUES (@OrderId, @CustomerId, @ProductId, @Price, @Quantity)";
+                    "INSERT INTO OrderInvoices (OrderInvoiceId, CustomerId, ProductId, Price, Quantity) " +
+                    "VALUES (@OrderInvoiceId, @CustomerId, @ProductId, @Price, @Quantity)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@OrderInvoiceId", orderInvoice.OrderInvoiceId);
@@ -97,6 +98,7 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+
         public void AddItemsToStorage(Items items)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -115,6 +117,7 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+
         public void AddProductToStorage(Products products)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -245,6 +248,7 @@ namespace Sem_Projekt_Dec_24.Data
             }
             return orderList;
         }
+
         public List<OrderInvoices> GetOrderInvoices()
         {
             List<OrderInvoices> orderInvoiceList = new List<OrderInvoices>();
@@ -435,7 +439,5 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
-
-
     }
 }

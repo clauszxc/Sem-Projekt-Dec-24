@@ -30,6 +30,10 @@ namespace Sem_Projekt_Dec_24.Winforms
             _dbManager = new DatabaseManager(connectionString);
 
             LoadProducts();
+            LoadCustomers();
+            LoadOrders();
+            LoadOrderInvoices();
+
             dgvProducts.DataSource = ProductList;
             dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -45,6 +49,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 ProductList.Add(product);
             }
         }
+
         private void LoadCustomers()
         {
             List<Customers> customersFromDB = _dbManager.GetCustomers();
@@ -53,6 +58,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 CustomerList.Add(customer);
             }
         }
+
         private void LoadOrders()
         {
             List<Orders> ordersFromDB = _dbManager.GetOrders();
@@ -61,6 +67,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 OrderList.Add(order);
             }
         }
+
         private void LoadOrderInvoices()
         {
             List<OrderInvoices> orderInvoicesFromDB = _dbManager.GetOrderInvoices();
@@ -69,6 +76,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 OrderInvoiceList.Add(orderInvoice);
             }
         }
+
         private void ClearInputFields()
         {
             txtbAdress.Clear();
@@ -85,11 +93,6 @@ namespace Sem_Projekt_Dec_24.Winforms
                 CreateOrderInvoice(customerId, orderId);
 
                 var selectedInvoices = GetSelectedInvoicesFromGrid();
-                if (selectedInvoices.Count == 0)
-                {
-                    MessageBox.Show("Please select at least one product or order.");
-                    return;
-                }
 
                 CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm(selectedInvoices);
                 customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
@@ -125,6 +128,7 @@ namespace Sem_Projekt_Dec_24.Winforms
 
             return newCustomerId;
         }
+
         private int GetOrCreateOrder(int customerId)
         {
             string orderStatus = "Ongoing";
