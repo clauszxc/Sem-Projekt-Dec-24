@@ -112,6 +112,6 @@ namespace Sem_Projekt_Dec_24.Winforms
                 InitializeComponent();
                 SelectedInvoices = selectedInvoices;
             }
-        
+
     }
 }

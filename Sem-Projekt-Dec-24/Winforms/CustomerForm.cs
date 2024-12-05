@@ -31,6 +31,11 @@ namespace Sem_Projekt_Dec_24.Winforms
 
             LoadProducts();
             dgvProducts.DataSource = ProductList;
+            dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // Customize selected row color
+            dgvProducts.DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            dgvProducts.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
         private void LoadProducts()
         {
@@ -142,7 +147,7 @@ namespace Sem_Projekt_Dec_24.Winforms
 
         private void CreateOrderInvoice(int  customerId, int orderId)
         {
-            int productId = 1;
+            int productId = GetSelectedProductId();
             decimal price = 100;
             if (!int.TryParse(txtbQuantity.Text, out int quantity) || quantity <= 0)
             {
@@ -167,6 +172,19 @@ namespace Sem_Projekt_Dec_24.Winforms
                 }
             }
             return selectedInvoices;
+        }
+
+        private int GetSelectedProductId()
+        {
+            if (dgvProducts.SelectedRows.Count > 0)
+            {
+                var selectedRow = dgvProducts.SelectedRows[0];
+                if (selectedRow.DataBoundItem is Products product)
+                {
+                    return product.ProductId;
+                }
+            }
+            throw new InvalidOperationException("Please select a valid product.");
         }
     }
 }
