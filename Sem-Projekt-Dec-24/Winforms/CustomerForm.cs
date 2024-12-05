@@ -25,9 +25,7 @@ namespace Sem_Projekt_Dec_24.Winforms
         {
             InitializeComponent();
 
-            //string connectionString = "Server=localhost;Database=SemProjectDB;Encryption=Optional;TrustServerCertificate=true;";
-            string connectionString = "Server=localhost;Database=SemProjectDB;Trusted_Connection=True;TrustServerCertificate=True;";
-
+            string connectionString = "Server=mssql2.unoeuro.com;Database=ferrariconnie_dk_db_semprojectdb;User Id=ferrariconnie_dk;Password=bkngcw5BmR6DEx2ep4a3;";
 
             _dbManager = new DatabaseManager(connectionString);
 
