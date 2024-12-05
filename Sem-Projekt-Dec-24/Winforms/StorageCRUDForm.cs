@@ -18,6 +18,7 @@ namespace Sem_Projekt_Dec_24.Winforms
     public partial class StorageCRUDForm : Form
     {
         private readonly string _connectionString;
+
         private readonly DatabaseManager _dbManager;
         public BindingList<Products> ProductList { get; set; } = new BindingList<Products>();
         public BindingList<Items> ItemList { get; set; } = new BindingList<Items>();
