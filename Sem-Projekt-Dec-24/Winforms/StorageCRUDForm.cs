@@ -71,35 +71,57 @@ namespace Sem_Projekt_Dec_24.Winforms
         }
 
         // Create Item
+
         private void btnStorageItemsCreate_Click(object sender, EventArgs e)
         {
+
             string txtbStorageItemsIdString = txtbStorageItemsId.Text;
             string txtbStorageItemsNameString = txtbStorageItemsName.Text;
             string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
 
-            int txtbStorageItemsIdInt = Convert.ToInt32(txtbStorageItemsIdString);
-            for (int i = 0; i < ItemList.Count; i++)
+            int txtbStorageItemsIdInt;
+
+
+            if (!int.TryParse(txtbStorageItemsIdString, out txtbStorageItemsIdInt))
             {
-                if (ItemList[i].ItemId == txtbStorageItemsIdInt)
-                {
-                    txtbStorageItemsIdInt = ItemList[i].ItemId;
-                    ClearInputFields();
-                    return;
-                }
-                else
-                {
-                    txtbStorageItemsIdInt = ItemList.Count > 0 ? ItemList.Max(c => c.ItemId) + 1 : 1;
-
-                    Items newItems = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, 0);
-
-                    ItemList.Add(newItems);
-                    _dbManager.AddItemsToStorage(newItems);
-
-                    ClearInputFields();
-                    return;
-                }
+                MessageBox.Show("Please enter a valid ID.");
+                return;
             }
+
+
+            var existingItem = ItemList.FirstOrDefault(i => i.ItemId == txtbStorageItemsIdInt);
+
+            if (existingItem != null)
+            {
+                MessageBox.Show("Item with this ID already exists.");
+                ClearInputFields();
+                return;
+            }
+
+
+            txtbStorageItemsIdInt = ItemList.Count > 0 ? ItemList.Max(c => c.ItemId) + 1 : 1;
+
+
+            Items newItems = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, 0);
+
+
+            ItemList.Add(newItems);
+
+
+            try
+            {
+                _dbManager.AddItemsToStorage(newItems); 
+                MessageBox.Show("Item added successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while adding the item: {ex.Message}");
+            }
+
+            ClearInputFields();
         }
+
+
 
         // Update Item
         private void btnStorageItemsUpdate_Click(object sender, EventArgs e)
@@ -124,6 +146,8 @@ namespace Sem_Projekt_Dec_24.Winforms
 
                 }
                 reader.Close();
+                dgvStorageItems.DataSource = null;
+                dgvStorageItems.DataSource = ItemList;
             }
         }
 
@@ -152,6 +176,8 @@ namespace Sem_Projekt_Dec_24.Winforms
                 _dbManager.DeleteItemsInStorage(deletedItem);
                 }
                 reader.Close();
+                dgvStorageItems.DataSource = null;
+                dgvStorageItems.DataSource = ItemList;
             }
         }
 
@@ -163,9 +189,9 @@ namespace Sem_Projekt_Dec_24.Winforms
             string txtbStorageProductsCategoryString = txtbStorageProductsCategory.Text;
 
             int txtbStorageProductIdInt = Convert.ToInt32(txtbStorageProductsIdString);
-            for (int i = 0; i < ItemList.Count; i++)
+            for (int i = 0; i < ProductList.Count; i++)
             {
-                if (ItemList[i].ItemId == txtbStorageProductIdInt)
+                if (ProductList[i].ProductId == txtbStorageProductIdInt)
                 {
                     txtbStorageProductIdInt = ProductList[i].ProductId;
                     ClearInputFields();
@@ -177,12 +203,14 @@ namespace Sem_Projekt_Dec_24.Winforms
                 {
                     txtbStorageProductIdInt = ProductList.Count > 0 ? ProductList.Max(c => c.ProductId) + 1 : 1;
 
-                    Items newItems = new Items(txtbStorageProductIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, 0);
+                    Products newProducts = new Products(txtbStorageProductIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, 0);
 
-                    ItemList.Add(newItems);
-                    _dbManager.AddItemsToStorage(newItems);
+                    ProductList.Add(newProducts);
+                    _dbManager.AddProductToStorage(newProducts);
 
                     ClearInputFields();
+                    dgvStorageProducts.DataSource = null;
+                    dgvStorageProducts.DataSource = ItemList;
                     return;
                 }
             }
@@ -212,6 +240,8 @@ namespace Sem_Projekt_Dec_24.Winforms
 
                 }
                 reader.Close();
+                dgvStorageProducts.DataSource = null;
+                dgvStorageProducts.DataSource = ItemList;
             }
         }
         // Delete Product
@@ -238,6 +268,8 @@ namespace Sem_Projekt_Dec_24.Winforms
                     _dbManager.DeleteProductsInStorage(deletedProduct);
                 }
                 reader.Close();
+                dgvStorageProducts.DataSource = null;
+                dgvStorageProducts.DataSource = ItemList;
             }
         }
 
