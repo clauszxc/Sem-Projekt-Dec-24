@@ -145,6 +145,7 @@
             this.btnStorageItemsDelete.TabIndex = 11;
             this.btnStorageItemsDelete.Text = "Delete";
             this.btnStorageItemsDelete.UseVisualStyleBackColor = true;
+            this.btnStorageItemsDelete.Click += new System.EventHandler(this.btnStorageItemsDelete_Click);
             // 
             // btnStorageProductsDelete
             // 
@@ -154,6 +155,7 @@
             this.btnStorageProductsDelete.TabIndex = 12;
             this.btnStorageProductsDelete.Text = "Delete";
             this.btnStorageProductsDelete.UseVisualStyleBackColor = true;
+            this.btnStorageProductsDelete.Click += new System.EventHandler(this.btnStorageProductsDelete_Click);
             // 
             // btnStorageProductsCreate
             // 
