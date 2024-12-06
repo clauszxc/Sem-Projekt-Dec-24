@@ -124,7 +124,7 @@ namespace Sem_Projekt_Dec_24.Data
             {
                 connection.Open();
                 string query =@"
-                    INSERT INTO Products(ProductId, ProductName, ProductCategory, ProductStock
+                    INSERT INTO Products (ProductId, ProductName, ProductCategory, ProductStock)
                     VALUES (@ProductId, @ProductName, @ProductCategory, @ProductStock)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
