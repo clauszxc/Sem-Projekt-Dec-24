@@ -165,6 +165,7 @@
             this.btnStorageProductsCreate.TabIndex = 13;
             this.btnStorageProductsCreate.Text = "Create";
             this.btnStorageProductsCreate.UseVisualStyleBackColor = true;
+            this.btnStorageProductsCreate.Click += new System.EventHandler(this.btnStorageProductsCreate_Click);
             // 
             // btnStorageGoBack
             // 

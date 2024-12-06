@@ -36,6 +36,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             LoadItems();
             dgvStorageItems.DataSource = ItemList;
         }
+
         // Loading Products Method
         private void LoadProducts()
         {
@@ -45,6 +46,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 ProductList.Add(product);
             }
         }
+
         // Loading Items Method
         private void LoadItems()
         {
@@ -54,6 +56,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 ItemList.Add(item);
             }
         }
+
         // Go Back Button
         private void btnStorageGoBack_Click(object sender, EventArgs e)
         {
@@ -62,6 +65,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             employeeForm.Show();
             this.Hide();
         }
+
         // Clear Fields
         private void ClearInputFields()
         {
@@ -71,23 +75,19 @@ namespace Sem_Projekt_Dec_24.Winforms
         }
 
         // Create Item
-
         private void btnStorageItemsCreate_Click(object sender, EventArgs e)
         {
-
             string txtbStorageItemsIdString = txtbStorageItemsId.Text;
             string txtbStorageItemsNameString = txtbStorageItemsName.Text;
             string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
 
             int txtbStorageItemsIdInt;
 
-
             if (!int.TryParse(txtbStorageItemsIdString, out txtbStorageItemsIdInt))
             {
                 MessageBox.Show("Please enter a valid ID.");
                 return;
             }
-
 
             var existingItem = ItemList.FirstOrDefault(i => i.ItemId == txtbStorageItemsIdInt);
 
@@ -98,19 +98,15 @@ namespace Sem_Projekt_Dec_24.Winforms
                 return;
             }
 
-
             txtbStorageItemsIdInt = ItemList.Count > 0 ? ItemList.Max(c => c.ItemId) + 1 : 1;
-
 
             Items newItems = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, 0);
 
-
             ItemList.Add(newItems);
-
 
             try
             {
-                _dbManager.AddItemsToStorage(newItems); 
+                _dbManager.AddItemsToStorage(newItems);
                 MessageBox.Show("Item added successfully.");
             }
             catch (Exception ex)
@@ -120,8 +116,6 @@ namespace Sem_Projekt_Dec_24.Winforms
 
             ClearInputFields();
         }
-
-
 
         // Update Item
         private void btnStorageItemsUpdate_Click(object sender, EventArgs e)
@@ -152,7 +146,6 @@ namespace Sem_Projekt_Dec_24.Winforms
         }
 
         // Delete Item
-
         private void btnStorageItemsDelete_Click(object sender, EventArgs e)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -167,13 +160,13 @@ namespace Sem_Projekt_Dec_24.Winforms
                 while (reader.Read())
                 {
                     int txtbStorageItemsIdInt = Convert.ToInt32(txtbStorageItemsId.Text);
-                string txtbStorageItemsNameString = txtbStorageItemsName.Text;
-                string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
-                int itemStock = Convert.ToInt32(reader["ItemStock"]);
+                    string txtbStorageItemsNameString = txtbStorageItemsName.Text;
+                    string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
+                    int itemStock = Convert.ToInt32(reader["ItemStock"]);
 
-                Items deletedItem = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, itemStock);
+                    Items deletedItem = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, itemStock);
 
-                _dbManager.DeleteItemsInStorage(deletedItem);
+                    _dbManager.DeleteItemsInStorage(deletedItem);
                 }
                 reader.Close();
                 dgvStorageItems.DataSource = null;
@@ -182,39 +175,46 @@ namespace Sem_Projekt_Dec_24.Winforms
         }
 
         //Create Product
-        private void btnStorageProductCreate_Click(object sender, EventArgs e)
+        private void btnStorageProductsCreate_Click(object sender, EventArgs e)
         {
             string txtbStorageProductsIdString = txtbStorageProductsId.Text;
             string txtbStorageProductsNameString = txtbStorageProductsName.Text;
             string txtbStorageProductsCategoryString = txtbStorageProductsCategory.Text;
 
-            int txtbStorageProductIdInt = Convert.ToInt32(txtbStorageProductsIdString);
-            for (int i = 0; i < ProductList.Count; i++)
+            int txtbStorageProductsIdInt;
+
+            if (!int.TryParse(txtbStorageProductsIdString, out txtbStorageProductsIdInt))
             {
-                if (ProductList[i].ProductId == txtbStorageProductIdInt)
-                {
-                    txtbStorageProductIdInt = ProductList[i].ProductId;
-                    ClearInputFields();
-                    return;
-
-
-                }
-                else
-                {
-                    txtbStorageProductIdInt = ProductList.Count > 0 ? ProductList.Max(c => c.ProductId) + 1 : 1;
-
-                    Products newProducts = new Products(txtbStorageProductIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, 0);
-
-                    ProductList.Add(newProducts);
-                    _dbManager.AddProductToStorage(newProducts);
-
-                    ClearInputFields();
-                    dgvStorageProducts.DataSource = null;
-                    dgvStorageProducts.DataSource = ItemList;
-                    return;
-                }
+                MessageBox.Show("Please enter a valid ID.");
+                return;
             }
 
+            var existingProduct = ProductList.FirstOrDefault(i => i.ProductId == txtbStorageProductsIdInt);
+
+            if (existingProduct != null)
+            {
+                MessageBox.Show("Product with this ID already exists.");
+                ClearInputFields();
+                return;
+            }
+
+            txtbStorageProductsIdInt = ProductList.Count > 0 ? ProductList.Max(c => c.ProductId) + 1 : 1;
+
+            Products newProducts = new Products(txtbStorageProductsIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, 0);
+
+            ProductList.Add(newProducts);
+
+            try
+            {
+                _dbManager.AddProductToStorage(newProducts);
+                MessageBox.Show("Product added successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while adding the Product: {ex.Message}");
+            }
+
+            ClearInputFields();
         }
 
         // Update Product
@@ -272,11 +272,5 @@ namespace Sem_Projekt_Dec_24.Winforms
                 dgvStorageProducts.DataSource = ItemList;
             }
         }
-
-
-     
-
-
     }
-
 }
