@@ -92,7 +92,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                 int orderId = GetOrCreateOrder(customerId);
                 CreateOrderInvoice(customerId, orderId);
 
-                var selectedInvoices = GetSelectedInvoicesFromGrid();
+                var selectedInvoices = GetSelectedInvoicesFromGrid(customerId, orderId);
 
                 CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm(selectedInvoices);
                 customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
@@ -161,18 +161,27 @@ namespace Sem_Projekt_Dec_24.Winforms
             int newOrderInvoiceId = OrderInvoiceList.Count > 0 ? OrderInvoiceList.Max(oi => oi.OrderInvoiceId) + 1 : 1;
             var newOrderInvoice = new OrderInvoices(newOrderInvoiceId, customerId, productId, price, quantity);
 
+
             OrderInvoiceList.Add(newOrderInvoice);
-            _dbManager.AddOrderInvoice(newOrderInvoice);
+            _dbManager.AddOrderInvoice(newOrderInvoice);            
         }
 
-        private List<OrderInvoices> GetSelectedInvoicesFromGrid()
+        private List<OrderInvoices> GetSelectedInvoicesFromGrid(int customerId, int orderId)
         {
             var selectedInvoices = new List<OrderInvoices>();
             foreach (DataGridViewRow row in dgvProducts.SelectedRows)
             {
-                if (row.DataBoundItem is OrderInvoices invoice)
+                if (row.DataBoundItem is Products product)
                 {
-                    selectedInvoices.Add(invoice);
+                    if (!int.TryParse(txtbQuantity.Text, out int quantity) || quantity <= 0)
+                    {
+                        throw new InvalidOperationException("Please enter valid quantity.");
+                    }
+
+                    int newOrderInvoiceId = OrderInvoiceList.Count > 0 ? OrderInvoiceList.Max(oi => oi.OrderInvoiceId) + 1 : 1;
+                    var newOrderInvoice = new OrderInvoices(newOrderInvoiceId, customerId, product.ProductId, 100, quantity);
+                    selectedInvoices.Add(newOrderInvoice);
+
                 }
             }
             return selectedInvoices;
