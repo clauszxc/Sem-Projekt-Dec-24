@@ -152,7 +152,7 @@ namespace Sem_Projekt_Dec_24.Winforms
         private void CreateOrderInvoice(int  customerId, int orderId)
         {
             int productId = GetSelectedProductId();
-            decimal price = 100;
+            decimal price = 9000;
             if (!int.TryParse(txtbQuantity.Text, out int quantity) || quantity <= 0)
             {
                 throw new InvalidOperationException("Please enter valid quantity.");
