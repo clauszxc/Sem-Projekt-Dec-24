@@ -28,39 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.btnCustomer = new System.Windows.Forms.Button();
             this.btnEmployee = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(368, 154);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Velkommen";
             // 
             // btnCustomer
             // 
-            this.btnCustomer.Location = new System.Drawing.Point(237, 225);
+            this.btnCustomer.BackColor = System.Drawing.Color.Transparent;
+            this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.btnCustomer.Location = new System.Drawing.Point(12, 194);
             this.btnCustomer.Name = "btnCustomer";
             this.btnCustomer.Size = new System.Drawing.Size(75, 23);
             this.btnCustomer.TabIndex = 1;
             this.btnCustomer.Text = "Customer";
-            this.btnCustomer.UseVisualStyleBackColor = true;
+            this.btnCustomer.UseVisualStyleBackColor = false;
             this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // btnEmployee
             // 
-            this.btnEmployee.Location = new System.Drawing.Point(509, 225);
+            this.btnEmployee.BackColor = System.Drawing.Color.Transparent;
+            this.btnEmployee.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnEmployee.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnEmployee.FlatAppearance.BorderSize = 0;
+            this.btnEmployee.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnEmployee.Location = new System.Drawing.Point(12, 223);
             this.btnEmployee.Name = "btnEmployee";
             this.btnEmployee.Size = new System.Drawing.Size(75, 23);
             this.btnEmployee.TabIndex = 2;
             this.btnEmployee.Text = "Employee";
-            this.btnEmployee.UseVisualStyleBackColor = true;
+            this.btnEmployee.UseVisualStyleBackColor = false;
             this.btnEmployee.Click += new System.EventHandler(this.btnEmployee_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Sem_Projekt_Dec_24.Properties.Resources.file_SCBpFxU7Z7AC4gC7Ep6Sa5;
+            this.pictureBox1.InitialImage = global::Sem_Projekt_Dec_24.Properties.Resources.file_SCBpFxU7Z7AC4gC7Ep6Sa5;
+            this.pictureBox1.Location = new System.Drawing.Point(-4, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(806, 449);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -69,18 +81,17 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnEmployee);
             this.Controls.Add(this.btnCustomer);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCustomer;
         private System.Windows.Forms.Button btnEmployee;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
