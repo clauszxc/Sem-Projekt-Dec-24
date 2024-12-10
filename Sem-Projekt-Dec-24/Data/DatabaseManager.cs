@@ -194,6 +194,7 @@ namespace Sem_Projekt_Dec_24.Data
             }
             return productList;
         }
+
         public List<Items> GetItems()
         {
             List<Items> itemList = new List<Items>();
@@ -353,50 +354,53 @@ namespace Sem_Projekt_Dec_24.Data
         }
 
         // Update Methods for Storage
-        public void UpdateItemsInStorage(int txtbStorageItemsIdInt, string txtbStorageItemsNameString, string txtbStorageItemsCategoryString, int itemStockPre)
+        public void UpdateItemsInStorage(int itemId, string itemName, string itemCategory)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "UPDATE Items SET ItemName = @ItemName, ItemCategory = @ItemCategory"+
+                string query = "UPDATE Items SET ItemName = @ItemName, ItemCategory = @ItemCategory " +
                                 "WHERE ItemId = @ItemId";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    command.Parameters.AddWithValue("@ItemId", itemId);
+                    command.Parameters.AddWithValue("@ItemName", itemName);
+                    command.Parameters.AddWithValue("@ItemCategory", itemCategory);
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
                     {
-                        while (reader.Read())
-                        {
-                            Items e = new Items(
-                                reader.GetInt32(0),
-                                reader.GetString(1),
-                                reader.GetString(2),
-                                reader.GetInt32(3)
-                            );
-                        }
+                        MessageBox.Show("Item updated successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item update failed or no changes made.");
                     }
                 }
             }
         }
+
         public void UpdateProductsInStorage(int productId, string productName, string productCategory)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "UPDATE Products SET ProductName = @ProductName, ProductCategory = @ProductCategory" +
+                string query = "UPDATE Products SET ProductName = @ProductName, ProductCategory = @ProductCategory " +
                                 "WHERE ProductId = @ProductId";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    command.Parameters.AddWithValue("@ProductId", productId);
+                    command.Parameters.AddWithValue("@ProductName", productName);
+                    command.Parameters.AddWithValue("@ProductCategory", productCategory);
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
                     {
-                        while (reader.Read())
-                        {
-                            Products e = new Products(
-                                reader.GetInt32(0),
-                                reader.GetString(1),
-                                reader.GetString(2),
-                                reader.GetInt32(3)
-                            );
-                        }
+                        MessageBox.Show("Product updated successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Product update failed or no changes made.");
                     }
                 }
             }
@@ -450,7 +454,7 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
-        public void DeleteProductsInStorage(Products products)
+        public void DeleteProductsInStorage(int productId, string productName, string productCategory)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -460,7 +464,7 @@ namespace Sem_Projekt_Dec_24.Data
                     "WHERE ProductId = @ProductId";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ProductId", products.ProductId.ToString());
+                    command.Parameters.AddWithValue("@ProductId", productId);
                     command.ExecuteNonQuery();
                 }
             }
