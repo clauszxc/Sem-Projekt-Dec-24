@@ -287,7 +287,7 @@ namespace Sem_Projekt_Dec_24.Data
             {
                 connection.Open();
                 string tableToUpdate = GetTableToUpdate(employeeEmail, customerAdress, shipperName);
-                string query = MakeUpdateQuery(tableToUpdate);
+                string query = MakeUpdateQuery(tableToUpdate, employeeEmail, employeeFirstName, employeeLastName, shipperName, customerEmail, customerAdress);
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -295,19 +295,27 @@ namespace Sem_Projekt_Dec_24.Data
 
                     if (tableToUpdate == "Employees")
                     {
-                        command.Parameters.AddWithValue("@EmployeeEmail", employeeEmail);
-                        command.Parameters.AddWithValue("@EmployeeFirstName", employeeFirstName);
-                        command.Parameters.AddWithValue("@EmployeeLastName", employeeLastName);
+                        if (!string.IsNullOrEmpty(employeeEmail))
+                            command.Parameters.AddWithValue("@EmployeeEmail", employeeEmail);
+                        if (!string.IsNullOrEmpty(employeeFirstName)) 
+                            command.Parameters.AddWithValue("@EmployeeFirstName", employeeFirstName);
+                        if (!string.IsNullOrEmpty(employeeLastName))
+                            command.Parameters.AddWithValue("@EmployeeLastName", employeeLastName);
                     }
                     else if (tableToUpdate == "Shippers")
                     {
-                        command.Parameters.AddWithValue("@ShipperName",shipperName);
+                        if (!string.IsNullOrEmpty(shipperName)) 
+                            command.Parameters.AddWithValue("@ShipperName", shipperName);
                     }
                     else if (tableToUpdate == "Customers")
                     {
-                        command.Parameters.AddWithValue("CustomerEmail", customerEmail);
-                        command.Parameters.AddWithValue("CustomerAdress", customerAdress);
+                        if (!string.IsNullOrEmpty(customerEmail)) 
+                            command.Parameters.AddWithValue("@CustomerEmail", customerEmail);
+                        if (!string.IsNullOrEmpty(customerAdress)) 
+                            command.Parameters.AddWithValue("@CustomerAdress", customerAdress);
                     }
+
+                    command.ExecuteNonQuery();
                 }
             }
         }
@@ -338,19 +346,41 @@ namespace Sem_Projekt_Dec_24.Data
             throw new ArgumentException("Can't determine table");
         }
 
-        private string MakeUpdateQuery(string tableName)
+        private string MakeUpdateQuery(string tableName, string employeeEmail, string employeeFirstName, string employeeLastName, string shipperName, string customerEmail, string customerAdress)
         {
-            switch (tableName)
+            string setClause = string.Empty;
+
+            if (tableName == "Employees")
             {
-                case "Employees":
-                    return "UPDATE Products SET ProductName = @ProductName, ProductCategory = @ProductCategory WHERE ProductId = @Id";
-                case "Customers":
-                    return "UPDATE Customers SET CustomerEmail = @CustomerEmail, CustomerAdress = @CustomerAdress WHERE CustomerId = @Id";
-                case "Shippers":
-                    return "UPDATE Shippers SET ShipperName = @ShipperName WHERE ShipperId = @Id";
-                default:
-                    throw new ArgumentException("Invalid table name.");
-            };
+                if (!string.IsNullOrEmpty(employeeEmail)) setClause += "EmployeeEmail = @EmployeeEmail, ";
+                if (!string.IsNullOrEmpty(employeeFirstName)) setClause += "EmployeeFirstName = @EmployeeFirstName, ";
+                if (!string.IsNullOrEmpty(employeeLastName)) setClause += "EmployeeLastName = @EmployeeLastName, ";
+
+                setClause = setClause.TrimEnd(',', ' ');
+
+                return $"UPDATE Employees SET {setClause} WHERE EmployeeId = @Id";
+            }
+
+            else if (tableName == "Shippers")
+            {
+                if (!string.IsNullOrEmpty(shipperName)) setClause += "ShipperName = @ShipperName, ";
+
+                setClause = setClause.TrimEnd(',', ' ');
+
+                return $"UPDATE Shippers SET {setClause} WHERE ShipperId = @Id";
+            }
+
+            else if (tableName == "Customers")
+            {
+                if (!string.IsNullOrEmpty(customerEmail)) setClause += "CustomerEmail = @CustomerEmail, ";
+                if (!string.IsNullOrEmpty(customerAdress)) setClause += "CustomerAdress = @CustomerAdress, ";
+
+                setClause = setClause.TrimEnd(',', ' ');
+
+                return $"UPDATE Customers SET {setClause} WHERE CustomerId = @Id";
+            }
+
+            throw new ArgumentException("Invalid table name.");
         }
 
         // Update Methods for Storage

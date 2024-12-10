@@ -65,7 +65,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
     }
