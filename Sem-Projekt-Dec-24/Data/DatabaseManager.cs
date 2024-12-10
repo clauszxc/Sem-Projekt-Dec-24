@@ -281,53 +281,76 @@ namespace Sem_Projekt_Dec_24.Data
         }
 
         // Update methods for actors
-        public void UpdateEmployee(string employeeEmail, string employeeFirstName, string employeeLastName)
+        public void UpdateActor(int actorId, string employeeEmail, string employeeFirstName, string employeeLastName, string shipperName, string customerEmail, string customerAdress)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "UPDATE Employees SET EmployeeEmail = @EmployeeEmail, EmployeeFirstName = @EmployeeFirstName, EmployeeLastName = @EmployeeLastName" +
-                                "WHERE EmployeeId = @EmployeeId";
+                string tableToUpdate = GetTableToUpdate(employeeEmail, customerAdress, shipperName);
+                string query = MakeUpdateQuery(tableToUpdate);
+
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    command.Parameters.AddWithValue("@Id", actorId);
+
+                    if (tableToUpdate == "Employees")
                     {
-                        while (reader.Read())
-                        {
-                            Employees e = new Employees(
-                                reader.GetInt32(0),
-                                reader.GetString(1),
-                                reader.GetString(2),
-                                reader.GetString(3)
-                            );
-                        }
+                        command.Parameters.AddWithValue("@EmployeeEmail", employeeEmail);
+                        command.Parameters.AddWithValue("@EmployeeFirstName", employeeFirstName);
+                        command.Parameters.AddWithValue("@EmployeeLastName", employeeLastName);
+                    }
+                    else if (tableToUpdate == "Shippers")
+                    {
+                        command.Parameters.AddWithValue("@ShipperName",shipperName);
+                    }
+                    else if (tableToUpdate == "Customers")
+                    {
+                        command.Parameters.AddWithValue("CustomerEmail", customerEmail);
+                        command.Parameters.AddWithValue("CustomerAdress", customerAdress);
                     }
                 }
             }
         }
 
-        public void UpdateCustomer(string customerEmail, string customerAdress)
+        private string GetTableToUpdate(string employeeEmail, string customerEmail, string shipperName)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            if (string.IsNullOrEmpty(employeeEmail) && string.IsNullOrEmpty(customerEmail) && string.IsNullOrEmpty(shipperName))
             {
-                connection.Open();
-                string query = "UPDATE Customers SET CustomerEmail = @CustomerEmail, CustomerAdress = @CustomerAdress" +
-                                "WHERE CustomerId = @CustomerId";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Customers e = new Customers(
-                                reader.GetInt32(0),
-                                reader.GetString(1),
-                                reader.GetString(2)
-                            );
-                        }
-                    }
-                }
+                MessageBox.Show($"der skete en fucking fejl");
+                return "Employees";
             }
+
+            if (!string.IsNullOrEmpty(employeeEmail))
+            {
+                return "Employees";
+            }
+
+            if (!string.IsNullOrEmpty(customerEmail))
+            {
+                return "Customers";
+            }
+
+            if (!string.IsNullOrEmpty(shipperName))
+            {
+                return "Shippers";
+            }
+
+            throw new ArgumentException("Can't determine table");
+        }
+
+        private string MakeUpdateQuery(string tableName)
+        {
+            switch (tableName)
+            {
+                case "Employees":
+                    return "UPDATE Products SET ProductName = @ProductName, ProductCategory = @ProductCategory WHERE ProductId = @Id";
+                case "Customers":
+                    return "UPDATE Customers SET CustomerEmail = @CustomerEmail, CustomerAdress = @CustomerAdress WHERE CustomerId = @Id";
+                case "Shippers":
+                    return "UPDATE Shippers SET ShipperName = @ShipperName WHERE ShipperId = @Id";
+                default:
+                    throw new ArgumentException("Invalid table name.");
+            };
         }
 
         // Update Methods for Storage
