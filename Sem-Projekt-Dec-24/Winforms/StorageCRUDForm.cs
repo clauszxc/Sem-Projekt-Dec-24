@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sem_Projekt_Dec_24.Data;
@@ -28,6 +29,7 @@ namespace Sem_Projekt_Dec_24.Winforms
         {
             InitializeComponent();
             string connectionString = "Server=mssql2.unoeuro.com;Database=ferrariconnie_dk_db_semprojectdb;User Id=ferrariconnie_dk;Password=bkngcw5BmR6DEx2ep4a3;";
+            _connectionString = connectionString;
             _dbManager = new DatabaseManager(connectionString);
 
             LoadProducts();
@@ -120,28 +122,45 @@ namespace Sem_Projekt_Dec_24.Winforms
         // Update Item
         private void btnStorageItemsUpdate_Click(object sender, EventArgs e)
         {
+            int itemId = Convert.ToInt32(txtbStorageItemsId.Text);
+            string itemName = txtbStorageItemsName.Text;
+            string itemCategory = txtbStorageItemsCategory.Text;
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query =
-                   "SELECT ItemStock FROM Items" +
-                   "WHERE ItemId = @ItemId";
+                string query = "SELECT itemStock FROM Items WHERE ItemId = @ItemId";
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ItemId", itemId);
+
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    int txtbStorageItemsIdInt = Convert.ToInt32(txtbStorageItemsId.Text);
-                    string txtbStorageItemsNameString = txtbStorageItemsName.Text;
-                    string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
                     int itemStock = Convert.ToInt32(reader["ItemStock"]);
 
-                    _dbManager.UpdateItemsInStorage(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, itemStock);
+                    _dbManager.UpdateItemsInStorage(itemId, itemName, itemCategory);
 
+                    var itemToUpdate = ItemList.FirstOrDefault(p => p.ItemId == itemId);
+                    if (itemToUpdate != null)
+                    {
+                        itemToUpdate.ItemName = itemName;
+                        itemToUpdate.ItemCategory = itemCategory;
+                        itemToUpdate.ItemStock = itemStock;
+
+                        dgvStorageItems.DataSource = null;
+                        dgvStorageItems.DataSource = ItemList;
+                        dgvStorageItems.Refresh();
+                    }
+
+                    MessageBox.Show("Item updated successfully.");
                 }
+                else
+                {
+                    MessageBox.Show("Item not found.");
+                }
+
                 reader.Close();
-                dgvStorageItems.DataSource = null;
-                dgvStorageItems.DataSource = ItemList;
             }
         }
 
@@ -220,30 +239,48 @@ namespace Sem_Projekt_Dec_24.Winforms
         // Update Product
         private void btnStorageProductsUpdate_Click(object sender, EventArgs e)
         {
+            int productId = Convert.ToInt32(txtbStorageProductsId.Text);
+            string productName = txtbStorageProductsName.Text;
+            string productCategory = txtbStorageProductsCategory.Text;
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query =
-                   "SELECT ProductStock FROM Products" +
-                   "WHERE ProductId = @ItemId";
+                string query = "SELECT ProductStock FROM Products WHERE ProductId = @ProductId";
                 SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ProductId", productId);
+
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    int txtbStorageProductsIdInt = Convert.ToInt32(txtbStorageItemsId.Text);
-                    string txtbStorageProductsNameString = txtbStorageItemsName.Text;
-                    string txtbStorageProductsCategoryString = txtbStorageItemsCategory.Text;
                     int productStock = Convert.ToInt32(reader["ProductStock"]);
 
-                    _dbManager.UpdateItemsInStorage(txtbStorageProductsIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, productStock);
+                    _dbManager.UpdateProductsInStorage(productId, productName, productCategory);
 
+                    var productToUpdate = ProductList.FirstOrDefault(p => p.ProductId == productId);
+                    if (productToUpdate != null)
+                    {
+                        productToUpdate.ProductName = productName;
+                        productToUpdate.ProductCategory = productCategory;
+                        productToUpdate.ProductStock = productStock;
+
+                        dgvStorageProducts.DataSource = null;
+                        dgvStorageProducts.DataSource = ProductList;
+                        dgvStorageProducts.Refresh();
+                    }
+
+                    MessageBox.Show("Product updated successfully.");
                 }
+                else
+                {
+                    MessageBox.Show("Product not found.");
+                }
+
                 reader.Close();
-                dgvStorageProducts.DataSource = null;
-                dgvStorageProducts.DataSource = ItemList;
             }
         }
+
         // Delete Product
         private void btnStorageProductsDelete_Click(object sender, EventArgs e)
         {
