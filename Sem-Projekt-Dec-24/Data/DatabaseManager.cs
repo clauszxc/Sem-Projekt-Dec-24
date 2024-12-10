@@ -431,7 +431,7 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
-        public void DeleteProductsInStorage(Products products)
+        public void DeleteProductsInStorage(int productId, string productName, string productCategory)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -441,7 +441,7 @@ namespace Sem_Projekt_Dec_24.Data
                     "WHERE ProductId = @ProductId";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ProductId", products.ProductId.ToString());
+                    command.Parameters.AddWithValue("@ProductId", productId);
                     command.ExecuteNonQuery();
                 }
             }

@@ -167,29 +167,51 @@ namespace Sem_Projekt_Dec_24.Winforms
         // Delete Item
         private void btnStorageItemsDelete_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            int itemId = Convert.ToInt32(txtbStorageItemsId.Text);
+
+            var itemToDelete = ItemList.FirstOrDefault(i => i.ItemId == itemId);
+            if (itemToDelete == null)
             {
-                string query =
-                   "SELECT ItemStock FROM Items" +
-                   "WHERE ItemId = @ItemId";
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                MessageBox.Show("Item not found in the list.");
+                return;
+            }
 
-                while (reader.Read())
+            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.No)
+            {
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    int txtbStorageItemsIdInt = Convert.ToInt32(txtbStorageItemsId.Text);
-                    string txtbStorageItemsNameString = txtbStorageItemsName.Text;
-                    string txtbStorageItemsCategoryString = txtbStorageItemsCategory.Text;
-                    int itemStock = Convert.ToInt32(reader["ItemStock"]);
+                    string query = "DELETE FROM Items WHERE ItemId = @ItemId";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@ItemId", itemId);
 
-                    Items deletedItem = new Items(txtbStorageItemsIdInt, txtbStorageItemsNameString, txtbStorageItemsCategoryString, itemStock);
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
 
-                    _dbManager.DeleteItemsInStorage(deletedItem);
+                    if (rowsAffected > 0)
+                    {
+                        ItemList.Remove(itemToDelete);
+
+                        dgvStorageItems.DataSource = null;
+                        dgvStorageItems.DataSource = ItemList;
+                        dgvStorageItems.Refresh();
+
+                        MessageBox.Show("Item deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item not found in the database.");
+                    }
                 }
-                reader.Close();
-                dgvStorageItems.DataSource = null;
-                dgvStorageItems.DataSource = ItemList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting the item: {ex.Message}");
             }
         }
 
@@ -284,29 +306,53 @@ namespace Sem_Projekt_Dec_24.Winforms
         // Delete Product
         private void btnStorageProductsDelete_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            int productId = Convert.ToInt32(txtbStorageProductsId.Text);
+
+            // Check if the product exists in the list first
+            var productToDelete = ProductList.FirstOrDefault(p => p.ProductId == productId);
+            if (productToDelete == null)
             {
-                string query =
-                   "SELECT ProductStock FROM Products" +
-                   "WHERE ProductId = @ProductId";
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
+                MessageBox.Show("Product not found in the list.");
+                return;
+            }
 
-                while (reader.Read())
+            // Confirm deletion with the user
+            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this product?", "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.No)
+            {
+                return;
+            }
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    int txtbStorageProductIdInt = Convert.ToInt32(txtbStorageProductsId.Text);
-                    string txtbStorageProductsNameString = txtbStorageProductsName.Text;
-                    string txtbStorageProductsCategoryString = txtbStorageProductsCategory.Text;
-                    int productStock = Convert.ToInt32(reader["ProductStock"]);
+                    string query = "DELETE FROM Products WHERE ProductId = @ProductId";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@ProductId", productId);
 
-                    Products deletedProduct = new Products(txtbStorageProductIdInt, txtbStorageProductsNameString, txtbStorageProductsCategoryString, productStock);
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery(); 
 
-                    _dbManager.DeleteProductsInStorage(deletedProduct);
+                    if (rowsAffected > 0)
+                    {
+                        ProductList.Remove(productToDelete);
+
+                        dgvStorageProducts.DataSource = null;
+                        dgvStorageProducts.DataSource = ProductList;
+                        dgvStorageProducts.Refresh();
+
+                        MessageBox.Show("Product deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Product not found in the database.");
+                    }
                 }
-                reader.Close();
-                dgvStorageProducts.DataSource = null;
-                dgvStorageProducts.DataSource = ItemList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while deleting the product: {ex.Message}");
             }
         }
     }
