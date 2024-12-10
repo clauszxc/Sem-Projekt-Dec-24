@@ -182,7 +182,7 @@ namespace Sem_Projekt_Dec_24.Data
                         {
                             Products e = new Products(
                                 reader.GetInt32(0),
-                                reader.GetString(1), 
+                                reader.GetString(1),
                                 reader.GetString(2),
                                 reader.GetInt32(3)
                             );
@@ -278,6 +278,143 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
             return orderInvoiceList;
+        }
+
+        public List<Employees> GetEmployees()
+        {
+            List<Employees> EmployeesList = new List<Employees>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Employees";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Employees e = new Employees(
+                                reader.GetInt32(0),
+                                reader.GetString(1),
+                                reader.GetString(2),
+                                reader.GetString(3)
+                            );
+
+                            EmployeesList.Add(e);
+                        }
+                    }
+                }
+            }
+            return EmployeesList;
+        }
+
+        public List<Shippers> GetShippers()
+        {
+            List<Shippers> ShippersList = new List<Shippers>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Shippers";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Shippers e = new Shippers(
+                                reader.GetInt32(0),
+                                reader.GetString(1)
+                            );
+
+                            ShippersList.Add(e);
+                        }
+                    }
+                }
+            }
+            return ShippersList;
+        }
+
+        public List<Suppliers> GetSuppliers()
+        {
+            List<Suppliers> SuppliersList = new List<Suppliers>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Suppliers";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Suppliers e = new Suppliers(
+                                reader.GetInt32(0)
+                            );
+
+                            SuppliersList.Add(e);
+                        }
+                    }
+                }
+            }
+            return SuppliersList;
+        }
+
+        public List<PurchaseOrders> GetPurchaseOrders()
+        {
+            List<PurchaseOrders> PurchaseOrderList = new List<PurchaseOrders>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM PurchaseOrders";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PurchaseOrders e = new PurchaseOrders(
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetInt32(3)
+                            );
+
+                            PurchaseOrderList.Add(e);
+                        }
+                    }
+                }
+            }
+            return PurchaseOrderList;
+        }
+
+        public List<Shipments> GetShipments()
+        {
+            List<Shipments> Shipmentlist = new List<Shipments>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Shipments";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Shipments e = new Shipments(
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetInt32(3),
+                                reader.GetString(4),
+                                reader.GetString(5)
+                            );
+
+                            Shipmentlist.Add(e);
+                        }
+                    }
+                }
+            }
+            return Shipmentlist;
         }
 
         // Update methods for actors

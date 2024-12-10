@@ -20,7 +20,10 @@ namespace Sem_Projekt_Dec_24.Tables
             ItemCategory = itemCategory;
             ItemStock = itemStock;
         }
-
+        public string ItemInformation
+        {
+            get { return $"{ItemName}, {ItemCategory}, {ItemStock}"; }
+        }
 
     }
 }

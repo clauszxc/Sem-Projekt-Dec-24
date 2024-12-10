@@ -18,5 +18,9 @@ namespace Sem_Projekt_Dec_24.Tables
             CustomerEmail = customerEmail;
             CustomerAdress = customerAdress;
         }
+        public string CustomerInformation
+        {
+            get { return $"{CustomerEmail}, {CustomerAdress}"; }
+        }
     }
 }

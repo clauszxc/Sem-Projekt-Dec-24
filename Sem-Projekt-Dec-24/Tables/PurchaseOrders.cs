@@ -20,5 +20,9 @@ namespace Sem_Projekt_Dec_24.Tables
             ItemId = itemId;
             ItemQuantity = itemQuantity;
         }
+        public string PurchaseOrderInformation
+        {
+            get { return $"SupplierId:{SupplierId}, ItemId:{ItemId}, {ItemQuantity}"; }
+        }
     }
 }
