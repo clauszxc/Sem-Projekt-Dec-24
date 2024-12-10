@@ -22,5 +22,9 @@ namespace Sem_Projekt_Dec_24.Tables
             Price = price;
             Quantity = quantity;
         }
+        public string OrderinvioceInformation
+        {
+            get { return $"{CustomerId} {ProductId}, {Price}, {Quantity}"; }
+        }
     }
 }

@@ -24,5 +24,9 @@ namespace Sem_Projekt_Dec_24.Tables
             ShipmentStartDate = shipmentStartDate;
             ShipmentEndDate = shipmentEndDate;
         }
+        public string ShipmentInformation
+        {
+            get { return $"OrderId:{OrderId}, CustomerId:{CustomerId}, ShipperId:{ShipperId}, {ShipmentStartDate}, {ShipmentEndDate}"; }
+        }
     }
 }

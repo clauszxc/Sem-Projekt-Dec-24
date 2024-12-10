@@ -20,5 +20,9 @@ namespace Sem_Projekt_Dec_24.Tables
             ShipperId = shipperId;
             OrderStatus = orderStatus;
         }
+        public string OrderInformation
+        {
+            get { return $"OrderId:{OrderId}, CustomerId:{CustomerId}, ShipperId:{ShipperId}, {OrderStatus}"; }
+        }
     }
 }

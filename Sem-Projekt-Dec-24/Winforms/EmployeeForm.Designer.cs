@@ -51,6 +51,7 @@
             this.btnProductsList.TabIndex = 0;
             this.btnProductsList.Text = "Products";
             this.btnProductsList.UseVisualStyleBackColor = true;
+            this.btnProductsList.Click += new System.EventHandler(this.btnProductsList_Click);
             // 
             // listBox1
             // 
@@ -68,6 +69,7 @@
             this.btnItemsList.TabIndex = 2;
             this.btnItemsList.Text = "Items";
             this.btnItemsList.UseVisualStyleBackColor = true;
+            this.btnItemsList.Click += new System.EventHandler(this.btnItemsList_Click);
             // 
             // btnShipmentsList
             // 
@@ -77,6 +79,7 @@
             this.btnShipmentsList.TabIndex = 3;
             this.btnShipmentsList.Text = "Shipments";
             this.btnShipmentsList.UseVisualStyleBackColor = true;
+            this.btnShipmentsList.Click += new System.EventHandler(this.btnShipmentsList_Click);
             // 
             // btnCustomersList
             // 
@@ -86,6 +89,7 @@
             this.btnCustomersList.TabIndex = 4;
             this.btnCustomersList.Text = "Customers";
             this.btnCustomersList.UseVisualStyleBackColor = true;
+            this.btnCustomersList.Click += new System.EventHandler(this.btnCustomersList_Click);
             // 
             // btnShippersList
             // 
@@ -95,6 +99,7 @@
             this.btnShippersList.TabIndex = 5;
             this.btnShippersList.Text = "Shippers";
             this.btnShippersList.UseVisualStyleBackColor = true;
+            this.btnShippersList.Click += new System.EventHandler(this.btnShippersList_Click);
             // 
             // btnOrdersList
             // 
@@ -104,6 +109,7 @@
             this.btnOrdersList.TabIndex = 6;
             this.btnOrdersList.Text = "Orders";
             this.btnOrdersList.UseVisualStyleBackColor = true;
+            this.btnOrdersList.Click += new System.EventHandler(this.btnOrdersList_Click);
             // 
             // btnEmployeesList
             // 
@@ -113,6 +119,7 @@
             this.btnEmployeesList.TabIndex = 7;
             this.btnEmployeesList.Text = "Employees";
             this.btnEmployeesList.UseVisualStyleBackColor = true;
+            this.btnEmployeesList.Click += new System.EventHandler(this.btnEmployeesList_Click);
             // 
             // btnPurchaseOrdersList
             // 
@@ -122,6 +129,7 @@
             this.btnPurchaseOrdersList.TabIndex = 8;
             this.btnPurchaseOrdersList.Text = "Purchase Orders";
             this.btnPurchaseOrdersList.UseVisualStyleBackColor = true;
+            this.btnPurchaseOrdersList.Click += new System.EventHandler(this.btnPurchaseOrdersList_Click);
             // 
             // btnSuppliersList
             // 
@@ -131,6 +139,7 @@
             this.btnSuppliersList.TabIndex = 9;
             this.btnSuppliersList.Text = "Suppliers";
             this.btnSuppliersList.UseVisualStyleBackColor = true;
+            this.btnSuppliersList.Click += new System.EventHandler(this.btnSuppliersList_Click);
             // 
             // btnEmployeeManageStorage
             // 

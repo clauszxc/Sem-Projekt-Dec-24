@@ -20,5 +20,10 @@ namespace Sem_Projekt_Dec_24.Tables
             EmployeeFirstName = employeeFirstName;
             EmployeeLastName = employeeLastName;
         }
+
+        public string EmployeeInformation
+        {
+            get { return $"{EmployeeFirstName} {EmployeeLastName}, {EmployeeEmail}"; }
+        }
     }
 }
