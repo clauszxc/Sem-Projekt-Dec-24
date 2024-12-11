@@ -97,11 +97,12 @@ namespace Sem_Projekt_Dec_24.Winforms
                 CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm(selectedInvoices);
                 customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
                 customerConfirmationForm.Show();
+
                 this.Hide();
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show($"Error: {ex.Message}");
             }
             finally
             {
@@ -163,7 +164,8 @@ namespace Sem_Projekt_Dec_24.Winforms
 
 
             OrderInvoiceList.Add(newOrderInvoice);
-            _dbManager.AddOrderInvoice(newOrderInvoice);            
+            _dbManager.AddOrderInvoice(newOrderInvoice);
+            _dbManager.UpdateProductStock(productId, quantity);
         }
 
         private List<OrderInvoices> GetSelectedInvoicesFromGrid(int customerId, int orderId)
