@@ -186,6 +186,24 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
+        public void AddPurchaseOrder(PurchaseOrders purchaseOrder)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO PurchaseOrders (PurchaseId, SupplierId, ItemId, ItemQuantity) " +
+                    "VALUES (@PurchaseId, @SupplierId, @ItemId, @ItemQuantity)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@PurchaseId", purchaseOrder.PurchaseId);
+                    command.Parameters.AddWithValue("@SupplierId", purchaseOrder.SupplierId);
+                    command.Parameters.AddWithValue("@ItemId", purchaseOrder.ItemId);
+                    command.Parameters.AddWithValue("@ItemQuantity", purchaseOrder.ItemQuantity);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
         public void AddOrderInvoice(OrderInvoices orderInvoice)
         {
@@ -202,6 +220,25 @@ namespace Sem_Projekt_Dec_24.Data
                     command.Parameters.AddWithValue("@ProductId", orderInvoice.ProductId);
                     command.Parameters.AddWithValue("@Price", orderInvoice.Price);
                     command.Parameters.AddWithValue("@Quantity", orderInvoice.Quantity);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        public void AddPurchaseOrderInvoice(PurchaseOrderInvoices purchaseOrderInvoice)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =
+                    "INSERT INTO PurchaseOrderInvoices (PurchaseOrderInvoiceId, SupplierId, ItemId, Price, Quantity) " +
+                    "VALUES (@PurchaseOrderInvoiceId, @SupplierId, @ItemId, @Price, @Quantity)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@PurchaseOrderInvoiceId", purchaseOrderInvoice.PurchaseOrderInvoiceId);
+                    command.Parameters.AddWithValue("@SupplierId", purchaseOrderInvoice.SupplierId);
+                    command.Parameters.AddWithValue("@ItemId", purchaseOrderInvoice.ItemId);
+                    command.Parameters.AddWithValue("@Price", purchaseOrderInvoice.Price);
+                    command.Parameters.AddWithValue("@Quantity", purchaseOrderInvoice.Quantity);
                     command.ExecuteNonQuery();
                 }
             }
@@ -492,6 +529,34 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
             return PurchaseOrderList;
+        }
+        public List<PurchaseOrderInvoices> GetPurchaseOrderInvoices()
+        {
+            List<PurchaseOrderInvoices> purchaseOrderInvoiceList = new List<PurchaseOrderInvoices>();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM PurchaseOrderInvoices";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PurchaseOrderInvoices e = new PurchaseOrderInvoices(
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetDecimal(3),
+                                reader.GetInt32(4)
+                            );
+
+                            purchaseOrderInvoiceList.Add(e);
+                        }
+                    }
+                }
+            }
+            return purchaseOrderInvoiceList;
         }
 
         public List<Shipments> GetShipments()

@@ -44,6 +44,7 @@
             this.btnStorageProductsCreate = new System.Windows.Forms.Button();
             this.btnStorageGoBack = new System.Windows.Forms.Button();
             this.btnCreateStorageReport = new System.Windows.Forms.Button();
+            this.btnPurchaseItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageProducts)).BeginInit();
             this.SuspendLayout();
@@ -92,6 +93,7 @@
             this.txtbStorageItemsCategory.Name = "txtbStorageItemsCategory";
             this.txtbStorageItemsCategory.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsCategory.TabIndex = 4;
+            this.txtbStorageItemsCategory.Text = "(item category)";
             // 
             // txtbStorageProductsId
             // 
@@ -99,6 +101,7 @@
             this.txtbStorageProductsId.Name = "txtbStorageProductsId";
             this.txtbStorageProductsId.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsId.TabIndex = 5;
+            this.txtbStorageProductsId.Text = "(product id)";
             // 
             // txtbStorageItemsId
             // 
@@ -106,6 +109,7 @@
             this.txtbStorageItemsId.Name = "txtbStorageItemsId";
             this.txtbStorageItemsId.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsId.TabIndex = 6;
+            this.txtbStorageItemsId.Text = "(item id)";
             // 
             // txtbStorageItemsName
             // 
@@ -113,6 +117,7 @@
             this.txtbStorageItemsName.Name = "txtbStorageItemsName";
             this.txtbStorageItemsName.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsName.TabIndex = 7;
+            this.txtbStorageItemsName.Text = "(item name)";
             // 
             // txtbStorageProductsName
             // 
@@ -120,6 +125,7 @@
             this.txtbStorageProductsName.Name = "txtbStorageProductsName";
             this.txtbStorageProductsName.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsName.TabIndex = 8;
+            this.txtbStorageProductsName.Text = "(product name";
             // 
             // txtbStorageProductsCategory
             // 
@@ -127,6 +133,7 @@
             this.txtbStorageProductsCategory.Name = "txtbStorageProductsCategory";
             this.txtbStorageProductsCategory.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsCategory.TabIndex = 9;
+            this.txtbStorageProductsCategory.Text = "(product category";
             // 
             // btnStorageItemsCreate
             // 
@@ -188,11 +195,22 @@
             this.btnCreateStorageReport.UseVisualStyleBackColor = true;
             this.btnCreateStorageReport.Click += new System.EventHandler(this.btnCreateStorageReport_Click);
             // 
+            // btnPurchaseItem
+            // 
+            this.btnPurchaseItem.Location = new System.Drawing.Point(328, 138);
+            this.btnPurchaseItem.Name = "btnPurchaseItem";
+            this.btnPurchaseItem.Size = new System.Drawing.Size(131, 23);
+            this.btnPurchaseItem.TabIndex = 16;
+            this.btnPurchaseItem.Text = "Purchase Item";
+            this.btnPurchaseItem.UseVisualStyleBackColor = true;
+            this.btnPurchaseItem.Click += new System.EventHandler(this.btnPurchaseItem_Click);
+            // 
             // StorageCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnPurchaseItem);
             this.Controls.Add(this.btnCreateStorageReport);
             this.Controls.Add(this.btnStorageGoBack);
             this.Controls.Add(this.btnStorageProductsCreate);
@@ -236,5 +254,6 @@
         private System.Windows.Forms.Button btnStorageProductsCreate;
         private System.Windows.Forms.Button btnStorageGoBack;
         private System.Windows.Forms.Button btnCreateStorageReport;
+        private System.Windows.Forms.Button btnPurchaseItem;
     }
 }
