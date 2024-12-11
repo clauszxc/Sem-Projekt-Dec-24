@@ -43,6 +43,7 @@
             this.btnStorageProductsDelete = new System.Windows.Forms.Button();
             this.btnStorageProductsCreate = new System.Windows.Forms.Button();
             this.btnStorageGoBack = new System.Windows.Forms.Button();
+            this.btnCreateStorageReport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageProducts)).BeginInit();
             this.SuspendLayout();
@@ -177,11 +178,22 @@
             this.btnStorageGoBack.UseVisualStyleBackColor = true;
             this.btnStorageGoBack.Click += new System.EventHandler(this.btnStorageGoBack_Click);
             // 
+            // btnCreateStorageReport
+            // 
+            this.btnCreateStorageReport.Location = new System.Drawing.Point(328, 167);
+            this.btnCreateStorageReport.Name = "btnCreateStorageReport";
+            this.btnCreateStorageReport.Size = new System.Drawing.Size(131, 23);
+            this.btnCreateStorageReport.TabIndex = 15;
+            this.btnCreateStorageReport.Text = "Create Storage Report";
+            this.btnCreateStorageReport.UseVisualStyleBackColor = true;
+            this.btnCreateStorageReport.Click += new System.EventHandler(this.btnCreateStorageReport_Click);
+            // 
             // StorageCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCreateStorageReport);
             this.Controls.Add(this.btnStorageGoBack);
             this.Controls.Add(this.btnStorageProductsCreate);
             this.Controls.Add(this.btnStorageProductsDelete);
@@ -223,5 +235,6 @@
         private System.Windows.Forms.Button btnStorageProductsDelete;
         private System.Windows.Forms.Button btnStorageProductsCreate;
         private System.Windows.Forms.Button btnStorageGoBack;
+        private System.Windows.Forms.Button btnCreateStorageReport;
     }
 }

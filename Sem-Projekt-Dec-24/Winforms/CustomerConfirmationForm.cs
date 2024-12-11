@@ -42,7 +42,7 @@ namespace Sem_Projekt_Dec_24.Winforms
         }
 
 
-        public void CreateInvoicePdf()
+        private void CreateInvoicePdf()
         {
 
             string fileName = "Invoice.pdf";
