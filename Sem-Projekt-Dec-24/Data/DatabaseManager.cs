@@ -8,6 +8,9 @@ using Sem_Projekt_Dec_24.Tables;
 using System.Data.SqlClient;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Windows.Markup;
+using System.Diagnostics.Eventing.Reader;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace Sem_Projekt_Dec_24.Data
 {
@@ -15,7 +18,9 @@ namespace Sem_Projekt_Dec_24.Data
     {
         private readonly string _connectionString;
         public BindingList<Products> ProductList { get; set; } = new BindingList<Products>();
-
+        public BindingList<Customers> CustomerList { get; set; } = new BindingList<Customers>();
+        public BindingList<Employees> EmployeeList { get; set; } = new BindingList<Employees>();
+        public BindingList<Shippers> ShipperList { get; set; } = new BindingList<Shippers>();
 
         public DatabaseManager(string connectionString)
         {
@@ -23,23 +28,125 @@ namespace Sem_Projekt_Dec_24.Data
         }
 
         // Create methods for actors
-        public void AddEmployee(Employees employee)
+
+
+        public void AddActor(int actorId, string employeeEmail, string employeeFirstName, string employeeLastName, string shipperName, string customerEmail, string customerAdress)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string query =
-                    "INSERT INTO Employees (EmployeeId, EmployeeEmail, EmployeeFirstName, EmployeeLastName) " +
-                    "VALUES (@EmployeeId, @EmployeeEmail, @EmployeeFirstName, @EmployeeLastName)";
+                string tableToAdd = GetTableToUpdate(employeeEmail, customerAdress, shipperName);
+                string query = MakeAddQuery(tableToAdd, employeeEmail, employeeFirstName, employeeLastName, shipperName, customerEmail, customerAdress);
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@EmployeeId", employee.EmployeeId);
-                    command.Parameters.AddWithValue("@EmployeeEmail", employee.EmployeeEmail);
-                    command.Parameters.AddWithValue("@EmployeeFirstName", employee.EmployeeFirstName);
-                    command.Parameters.AddWithValue("@EmployeeLastName", employee.EmployeeLastName);
+                    
+                    if (tableToAdd == "Employees")
+                    {
+                        var existingItem = EmployeeList.FirstOrDefault(i => i.EmployeeId == actorId);
+
+                        if (existingItem != null)
+                        {
+                            MessageBox.Show("Item with this ID already exists.");
+                            return;
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@EmployeeId", actorId);
+
+                            if (!string.IsNullOrEmpty(employeeEmail))
+                                command.Parameters.AddWithValue("@EmployeeEmail", employeeEmail);
+                            if (!string.IsNullOrEmpty(employeeFirstName))
+                                command.Parameters.AddWithValue("@EmployeeFirstName", employeeFirstName);
+                            if (!string.IsNullOrEmpty(employeeLastName))
+                                command.Parameters.AddWithValue("@EmployeeLastName", employeeLastName);
+
+                            actorId = EmployeeList.Count > 0 ? EmployeeList.Max(c => c.EmployeeId) + 1 : 1;
+                            Employees newEmployee = new Employees(actorId, employeeEmail, employeeFirstName, employeeLastName);
+                            EmployeeList.Add(newEmployee);
+                        }
+                    }
+                    else if (tableToAdd == "Shippers")
+                    {
+                        var existingItem = ShipperList.FirstOrDefault(i => i.ShipperId == actorId);
+                        if (existingItem != null)
+                        {
+                            MessageBox.Show("Item with this ID already exists.");
+                            return;
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@ShipperId", actorId);
+                            if (!string.IsNullOrEmpty(shipperName))
+                                command.Parameters.AddWithValue("@ShipperName", shipperName);
+                            actorId = ShipperList.Count > 0 ? ShipperList.Max(c => c.ShipperId) + 1 : 1;
+                            Shippers newShipper = new Shippers(actorId, shipperName);
+                            ShipperList.Add(newShipper);
+                        }
+                    }
+                    else if (tableToAdd == "Customers")
+                    {
+                        var existingItem = ShipperList.FirstOrDefault(i => i.ShipperId == actorId);
+                        if (existingItem != null)
+                        {
+                            MessageBox.Show("Item with this ID already exists.");
+                            return;
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@CustomerId", actorId);
+                            if (!string.IsNullOrEmpty(customerEmail))
+                                command.Parameters.AddWithValue("@CustomerEmail", customerEmail);
+                            if (!string.IsNullOrEmpty(customerAdress))
+                                command.Parameters.AddWithValue("@CustomerAdress", customerAdress);
+                            actorId = CustomerList.Count > 0 ? CustomerList.Max(c => c.CustomerId) + 1 : 1;
+                            Customers newCustomer = new Customers(actorId, customerEmail, customerAdress);
+                            CustomerList.Add(newCustomer);
+                        }
+                    }
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        private string MakeAddQuery(string tableName, string employeeEmail, string employeeFirstName, string employeeLastName, string shipperName, string customerEmail, string customerAdress)
+        {
+            string setClause = string.Empty;
+
+            if (tableName == "Employees")
+            {
+                if (!string.IsNullOrEmpty(employeeEmail)) setClause += "EmployeeEmail = @EmployeeEmail, ";
+                if (!string.IsNullOrEmpty(employeeFirstName)) setClause += "EmployeeFirstName = @EmployeeFirstName, ";
+                if (!string.IsNullOrEmpty(employeeLastName)) setClause += "EmployeeLastName = @EmployeeLastName, ";
+
+                setClause = setClause.TrimEnd(',', ' ');
+
+                return $"INSERT INTO Employees (EmployeeId, EmployeeEmail, EmployeeFirstName, EmployeeLastName) " +
+                    $"VALUES (@EmployeeId, @EmployeeEmail, @EmployeeFirstName, @EmployeeLastName)";
+
+            }
+
+            else if (tableName == "Shippers")
+            {
+                if (!string.IsNullOrEmpty(shipperName)) setClause += "ShipperName = @ShipperName, ";
+
+                setClause = setClause.TrimEnd(',', ' ');
+
+                return $"INSERT INTO Shippers (ShipperId, ShipperName) " +
+                    $"VALUES (@ShipperId, @ShipperName)";
+            }
+
+            else if (tableName == "Customers")
+            {
+                if (!string.IsNullOrEmpty(customerEmail)) setClause += "CustomerEmail = @CustomerEmail, ";
+                if (!string.IsNullOrEmpty(customerAdress)) setClause += "CustomerAdress = @CustomerAdress, ";
+
+                setClause = setClause.TrimEnd(',', ' ');
+
+                return $"INSERT INTO Customers (CustomerId, CustomerEmail, CustomerAdress) " +
+                    $"VALUES (@CustomerId, @CustomerEmail, @CustomerAdress)";
+            }
+
+            throw new ArgumentException("Invalid table name.");
         }
 
         public void AddCustomer(Customers customer)
