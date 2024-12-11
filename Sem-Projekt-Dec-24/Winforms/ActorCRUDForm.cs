@@ -25,19 +25,15 @@ namespace Sem_Projekt_Dec_24.Winforms
             _dbManager = new DatabaseManager(connectionString);
         }
 
-        private void textBox5_TextChanged(object sender, EventArgs e)
+        private void ClearInputFields()
         {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-
+            txtbActorId.Clear();
+            txtbActorEmployeeEmail.Clear();
+            txtbActorEmployeeFirstName.Clear();
+            txtbActorEmployeeLastName.Clear();
+            txtbActorShipperName.Clear();
+            txtbActorCustomerEmail.Clear();
+            txtbActorCustomerAdress.Clear();
         }
 
         private void btnActorGoBack_Click(object sender, EventArgs e)
@@ -62,10 +58,47 @@ namespace Sem_Projekt_Dec_24.Winforms
 
                 _dbManager.UpdateActor(actorId, employeeEmail, employeeFirstName, employeeLastName, shipperName, customerEmail, customerAdress);
                 MessageBox.Show("Actor Updated Succesfully");
+                ClearInputFields();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
+                ClearInputFields();
+            }
+        }
+
+        private void btnActorCreate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string actorIdString = txtbActorId.Text;
+                int actorId = int.Parse(txtbActorId.Text);
+                string employeeEmail = txtbActorEmployeeEmail.Text;
+                string employeeFirstName = txtbActorEmployeeFirstName.Text;
+                string employeeLastName = txtbActorEmployeeLastName.Text;
+                string shipperName = txtbActorShipperName.Text;
+                string customerEmail = txtbActorCustomerEmail.Text;
+                string customerAdress = txtbActorCustomerAdress.Text;
+
+                int txtbActorIdInt;
+
+                if (!int.TryParse(actorIdString, out txtbActorIdInt))
+                {
+                    MessageBox.Show("Please enter a valid ID.");
+                    return;
+                }
+                else
+                {
+                    _dbManager.AddActor(actorId, employeeEmail, employeeFirstName, employeeLastName, shipperName, customerEmail, customerAdress);
+                    MessageBox.Show("Actor Added Succesfully");
+                    ClearInputFields();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                ClearInputFields();
             }
         }
     }

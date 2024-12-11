@@ -67,6 +67,7 @@
             this.btnActorCreate.TabIndex = 4;
             this.btnActorCreate.Text = "Create";
             this.btnActorCreate.UseVisualStyleBackColor = true;
+            this.btnActorCreate.Click += new System.EventHandler(this.btnActorCreate_Click);
             // 
             // cmbbChooseActor
             // 
@@ -96,7 +97,6 @@
             this.txtbActorCustomerAdress.Name = "txtbActorCustomerAdress";
             this.txtbActorCustomerAdress.Size = new System.Drawing.Size(100, 20);
             this.txtbActorCustomerAdress.TabIndex = 13;
-            this.txtbActorCustomerAdress.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // txtbActorCustomerEmail
             // 
@@ -104,7 +104,6 @@
             this.txtbActorCustomerEmail.Name = "txtbActorCustomerEmail";
             this.txtbActorCustomerEmail.Size = new System.Drawing.Size(100, 20);
             this.txtbActorCustomerEmail.TabIndex = 14;
-            this.txtbActorCustomerEmail.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // txtbActorShipperName
             // 
@@ -119,7 +118,6 @@
             this.txtbActorEmployeeLastName.Name = "txtbActorEmployeeLastName";
             this.txtbActorEmployeeLastName.Size = new System.Drawing.Size(100, 20);
             this.txtbActorEmployeeLastName.TabIndex = 16;
-            this.txtbActorEmployeeLastName.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // txtbActorEmployeeFirstName
             // 
