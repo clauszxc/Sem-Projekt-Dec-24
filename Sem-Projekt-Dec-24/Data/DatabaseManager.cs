@@ -628,6 +628,48 @@ namespace Sem_Projekt_Dec_24.Data
         }
 
         // Update Methods for Storage
+        public void UpdateItemStock (int itemId, int itemQuantity)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query =  "UPDATE Items SET ItemStock = ItemStock + @ItemQuantity " +
+                                "WHERE ItemId = @ItemId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ItemQuantity", itemQuantity);
+                    command.Parameters.AddWithValue("@ItemId", itemId);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected == 0)
+                    {
+                        throw new InvalidOperationException("Insufficient stock or invalid item ID.");
+                    }
+                }
+            };
+        }
+        public void UpdateProductStock(int productId, int productQuantity)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE Products SET ProductStock = ProductStock - @ProductQuantity " +
+                                "WHERE ProductId = @ProductId AND ProductStock >= @ProductQuantity";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ProductQuantity", productQuantity);
+                    command.Parameters.AddWithValue("@ProductId", productId);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected == 0)
+                    {
+                        throw new InvalidOperationException("Insufficient stock or invalid product ID.");
+                    }
+                }
+            };
+        }
         public void UpdateItemsInStorage(int itemId, string itemName, string itemCategory)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
