@@ -788,19 +788,111 @@ namespace Sem_Projekt_Dec_24.Data
         }
 
         // Delete methods for Actors
-        public void DeleteEmployee(Employees employee)
+        public void DeleteEmployee(int actorId)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            var employeeToDelete = EmployeeList.FirstOrDefault(p => p.EmployeeId == actorId);
+
+            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this employee?", "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.No)
             {
-                connection.Open();
-                string query =
-                    "DELETE FROM Employees " +
-                    "WHERE EmployeeId = @EmployeeId";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                return;
+            }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    command.Parameters.AddWithValue("@EmployeeId", employee.EmployeeId.ToString());
-                    command.ExecuteNonQuery();
+                    string query = "DELETE FROM Employees WHERE EmployeeId = @EmployeeId";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@EmployeeId", actorId);
+
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Employee deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Employee not found in the database.");
+                    }
                 }
+            }
+            catch
+            {
+                MessageBox.Show("Not working in Employee");
+            }
+        }
+
+        public void DeleteShipper(int actorId)
+        {
+            var shipperToDelete = ShipperList.FirstOrDefault(p => p.ShipperId == actorId);
+
+            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this Shipper?", "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.No)
+            {
+                return;
+            }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    string query = "DELETE FROM Shippers WHERE ShipperId = @ShipperId";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@ShipperId", actorId);
+
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Shipper deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Shipper not found in the database.");
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Not working in Shipper");
+            }
+        }
+
+        public void DeleteCustomer(int actorId)
+        {
+            var customerToDelete = CustomerList.FirstOrDefault(p => p.CustomerId == actorId);
+
+            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this Customer?", "Confirm Deletion", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.No)
+            {
+                return;
+            }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    string query = "DELETE FROM Customers WHERE CustomerId = @CustomerId";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@CustomerId", actorId);
+
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Customer deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Customer not found in the database.");
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Not working in Customer");
             }
         }
 

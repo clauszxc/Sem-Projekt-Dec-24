@@ -343,7 +343,6 @@ namespace Sem_Projekt_Dec_24.Winforms
         {
             int productId = Convert.ToInt32(txtbStorageProductsId.Text);
 
-            // Check if the product exists in the list first
             var productToDelete = ProductList.FirstOrDefault(p => p.ProductId == productId);
             if (productToDelete == null)
             {
@@ -351,7 +350,6 @@ namespace Sem_Projekt_Dec_24.Winforms
                 return;
             }
 
-            // Confirm deletion with the user
             DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this product?", "Confirm Deletion", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.No)
             {
