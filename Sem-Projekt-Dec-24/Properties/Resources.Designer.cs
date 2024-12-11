@@ -63,9 +63,29 @@ namespace Sem_Projekt_Dec_24.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap file_3dNjEdtJdvQdAxZrWsck2u {
+            get {
+                object obj = ResourceManager.GetObject("file-3dNjEdtJdvQdAxZrWsck2u", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap file_SCBpFxU7Z7AC4gC7Ep6Sa5 {
             get {
                 object obj = ResourceManager.GetObject("file-SCBpFxU7Z7AC4gC7Ep6Sa5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap yes {
+            get {
+                object obj = ResourceManager.GetObject("yes", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
