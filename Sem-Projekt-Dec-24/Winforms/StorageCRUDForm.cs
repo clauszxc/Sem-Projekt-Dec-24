@@ -36,6 +36,8 @@ namespace Sem_Projekt_Dec_24.Winforms
         private readonly DatabaseManager _dbManager;
         public BindingList<Products> ProductList { get; set; } = new BindingList<Products>();
         public BindingList<Items> ItemList { get; set; } = new BindingList<Items>();
+        public BindingList<PurchaseOrders> PurchaseOrderList { get; set; } = new BindingList<PurchaseOrders>();
+        public BindingList<PurchaseOrderInvoices> PurchaseOrderInvoiceList { get; set; } = new BindingList<PurchaseOrderInvoices>();
 
         // Connect and Load List
         public StorageCRUDForm()
@@ -50,6 +52,9 @@ namespace Sem_Projekt_Dec_24.Winforms
 
             LoadItems();
             dgvStorageItems.DataSource = ItemList;
+
+            LoadPurchaseOrders();
+            LoadPurchaseOrderInvoices();
         }
 
         // Loading Products Method
@@ -69,6 +74,23 @@ namespace Sem_Projekt_Dec_24.Winforms
             foreach (var item in itemsFromDB)
             {
                 ItemList.Add(item);
+            }
+        }
+        private void LoadPurchaseOrders()
+        {
+            List<PurchaseOrders> purchaseOrdersFromDB = _dbManager.GetPurchaseOrders();
+            foreach (var order in purchaseOrdersFromDB)
+            {
+                PurchaseOrderList.Add(order);
+            }
+        }
+
+        private void LoadPurchaseOrderInvoices()
+        {
+            List<PurchaseOrderInvoices> purchaseOrderInvoicesFromDB = _dbManager.GetPurchaseOrderInvoices();
+            foreach (var purchaseOrderInvoice in purchaseOrderInvoicesFromDB)
+            {
+                PurchaseOrderInvoiceList.Add(purchaseOrderInvoice);
             }
         }
 
@@ -443,6 +465,97 @@ namespace Sem_Projekt_Dec_24.Winforms
             }
 
             MessageBox.Show($"PDF Invoice created at: {filePath}");
+        }
+
+        private void btnPurchaseItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int itemId = GetSelectedItemId();
+                int purchaseOrderId = CreatePurchaseOrder(itemId);
+                CreatePurchaseOrderInvoice(purchaseOrderId);
+                int supplierId = 1;
+                int quantity = 50;
+
+                var selectedInvoices = GetSelectedPurchaseOrderInvoicesFromGrid(purchaseOrderId, supplierId, quantity);
+
+                var itemToUpdate2 = ItemList.FirstOrDefault(p => p.ItemId == itemId);
+                if (itemToUpdate2 != null)
+                {
+                    itemToUpdate2.ItemStock += quantity;
+
+                    dgvStorageItems.DataSource = null;
+                    dgvStorageItems.DataSource = ItemList;
+                    dgvStorageItems.Refresh();
+                }
+
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        private int CreatePurchaseOrder(int itemId)
+        {
+            string orderStatus = "Completed";
+            int supplierId = 1;
+            int itemQuantity = 1;
+
+            int purchaseOrderId = PurchaseOrderList.Count > 0 ? PurchaseOrderList.Max(c => c.PurchaseId) + 1 : 1;
+            var purchaseOrder = new PurchaseOrders(purchaseOrderId, supplierId, itemId, itemQuantity);
+
+            PurchaseOrderList.Add(purchaseOrder);
+            _dbManager.AddPurchaseOrder(purchaseOrder);
+
+            return purchaseOrderId;
+        }
+
+        private PurchaseOrderInvoices CreatePurchaseOrderInvoice(int purchaseOrderId)
+        {
+            int itemId = GetSelectedItemId();
+            decimal price = 1000;
+            int quantity = 50;
+            int supplierId = 1;
+
+            int purchaseOrderInvoiceId = PurchaseOrderInvoiceList.Count > 0 ? PurchaseOrderInvoiceList.Max(poi => poi.PurchaseOrderInvoiceId) + 1 : 1;
+            var purchaseOrderInvoice = new PurchaseOrderInvoices(purchaseOrderInvoiceId, supplierId, itemId, price, quantity);
+
+            PurchaseOrderInvoiceList.Add(purchaseOrderInvoice);
+            _dbManager.AddPurchaseOrderInvoice(purchaseOrderInvoice);
+            _dbManager.UpdateItemStock(itemId, quantity);
+
+            return purchaseOrderInvoice;
+        }
+
+        private List<PurchaseOrderInvoices> GetSelectedPurchaseOrderInvoicesFromGrid(int purchaseOrderId, int supplierId, int quantity)
+        {
+            var selectedInvoices = new List<PurchaseOrderInvoices>();
+            foreach (DataGridViewRow row in dgvStorageItems.SelectedRows)
+            {
+                if (row.DataBoundItem is Items item)
+                {
+                    int purchaseOrderInvoiceId = PurchaseOrderInvoiceList.Count > 0 ? PurchaseOrderInvoiceList.Max(poi => poi.PurchaseOrderInvoiceId) + 1 : 1;
+                    var purchaseOrderInvoice = new PurchaseOrderInvoices(purchaseOrderInvoiceId, supplierId, item.ItemId, 100, quantity);
+                    selectedInvoices.Add(purchaseOrderInvoice);
+
+                }
+            }
+            return selectedInvoices;
+        }
+
+        private int GetSelectedItemId()
+        {
+            if (dgvStorageItems.SelectedRows.Count > 0)
+            {
+                var selectedRow = dgvStorageItems.SelectedRows[0];
+                if (selectedRow.DataBoundItem is Items item)
+                {
+                    return item.ItemId;
+                }
+            }
+            throw new InvalidOperationException("Please select a valid item.");
         }
     }
 }
