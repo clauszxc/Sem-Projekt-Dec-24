@@ -5,14 +5,27 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iText.Kernel.Colors;
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Draw;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using Sem_Projekt_Dec_24.Data;
 using Sem_Projekt_Dec_24.Tables;
 using Sem_Projekt_Dec_24.Winforms;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.Kernel.Colors;
+using iText.Kernel.Pdf.Canvas.Draw;
+using Sem_Projekt_Dec_24.Tables;
 
 namespace Sem_Projekt_Dec_24.Winforms
 {
@@ -332,7 +345,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                     command.Parameters.AddWithValue("@ProductId", productId);
 
                     connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery(); 
+                    int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)
                     {
@@ -354,6 +367,82 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 MessageBox.Show($"An error occurred while deleting the product: {ex.Message}");
             }
+        }
+
+        private void btnCreateStorageReport_Click(object sender, EventArgs e)
+        {
+            CreateStorageReport();
+        }
+
+        private void CreateStorageReport()
+        {
+            List<Items> itemsFromDBToReport = _dbManager.GetItems();
+            List<Products> productsFromDBToReport = _dbManager.GetProducts();
+
+            string fileName = "Storage_Report.pdf";
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+
+            using (PdfWriter writer = new PdfWriter(filePath))
+            using (PdfDocument pdf = new PdfDocument(writer))
+            {
+                Document document = new Document(pdf);
+
+                Paragraph header = new Paragraph("Storage Report")
+                    .SetFontSize(20)
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetFontColor(ColorConstants.BLACK);
+                document.Add(header);
+
+                Paragraph date = new Paragraph($"Date: {DateTime.Now:dd-MM-yyyy}")
+                    .SetFontSize(14)
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetMarginTop(20);
+                document.Add(date);
+
+                LineSeparator separator = new LineSeparator(new SolidLine(1));
+                document.Add(separator);
+
+                Table table = new Table(5);
+                table.AddHeaderCell("Type");
+                table.AddHeaderCell("ID");
+                table.AddHeaderCell("Name");
+                table.AddHeaderCell("Category");
+                table.AddHeaderCell("Stock");
+
+                var allStorage = new List<object>();
+                allStorage.AddRange(ItemList);
+                allStorage.AddRange(ProductList);
+
+                foreach (var item in allStorage)
+                {
+                    if (item is Items itm)
+                    {
+                        table.AddCell("Item");
+                        table.AddCell(itm.ItemId.ToString());
+                        table.AddCell(itm.ItemName);
+                        table.AddCell(itm.ItemCategory);
+                        table.AddCell(itm.ItemStock.ToString());
+                    }
+                    else if (item is Products prod)
+                    {
+                        table.AddCell("Product");
+                        table.AddCell(prod.ProductId.ToString());
+                        table.AddCell(prod.ProductName);
+                        table.AddCell(prod.ProductCategory);
+                        table.AddCell(prod.ProductStock.ToString());
+                    }
+                }
+
+                document.Add(table);
+
+                Paragraph footer = new Paragraph("List of all items and products currently in storage.")
+                    .SetFontSize(14)
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetMarginTop(30);
+                document.Add(footer);
+            }
+
+            MessageBox.Show($"PDF Invoice created at: {filePath}");
         }
     }
 }
