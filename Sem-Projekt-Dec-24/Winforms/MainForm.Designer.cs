@@ -39,9 +39,9 @@
             this.btnCustomer.BackColor = System.Drawing.Color.Transparent;
             this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnCustomer.Location = new System.Drawing.Point(12, 194);
+            this.btnCustomer.Location = new System.Drawing.Point(320, 288);
             this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(75, 23);
+            this.btnCustomer.Size = new System.Drawing.Size(77, 69);
             this.btnCustomer.TabIndex = 1;
             this.btnCustomer.Text = "Customer";
             this.btnCustomer.UseVisualStyleBackColor = false;
@@ -51,13 +51,14 @@
             // 
             this.btnEmployee.BackColor = System.Drawing.Color.Transparent;
             this.btnEmployee.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnEmployee.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnEmployee.FlatAppearance.BorderSize = 0;
+            this.btnEmployee.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnEmployee.FlatAppearance.BorderSize = 10000;
             this.btnEmployee.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnEmployee.Location = new System.Drawing.Point(12, 223);
+            this.btnEmployee.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnEmployee.Location = new System.Drawing.Point(415, 288);
             this.btnEmployee.Name = "btnEmployee";
-            this.btnEmployee.Size = new System.Drawing.Size(75, 23);
+            this.btnEmployee.Size = new System.Drawing.Size(78, 69);
             this.btnEmployee.TabIndex = 2;
             this.btnEmployee.Text = "Employee";
             this.btnEmployee.UseVisualStyleBackColor = false;
@@ -65,7 +66,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Sem_Projekt_Dec_24.Properties.Resources.file_SCBpFxU7Z7AC4gC7Ep6Sa5;
+            this.pictureBox1.Image = global::Sem_Projekt_Dec_24.Properties.Resources.yes;
             this.pictureBox1.InitialImage = global::Sem_Projekt_Dec_24.Properties.Resources.file_SCBpFxU7Z7AC4gC7Ep6Sa5;
             this.pictureBox1.Location = new System.Drawing.Point(-4, 0);
             this.pictureBox1.Name = "pictureBox1";
