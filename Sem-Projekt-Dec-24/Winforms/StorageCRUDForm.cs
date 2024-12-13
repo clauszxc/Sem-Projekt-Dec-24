@@ -19,13 +19,8 @@ using iText.Layout.Properties;
 using Sem_Projekt_Dec_24.Data;
 using Sem_Projekt_Dec_24.Tables;
 using Sem_Projekt_Dec_24.Winforms;
-using iText.Kernel.Pdf;
 using iText.Layout;
-using iText.Layout.Element;
-using iText.Layout.Properties;
-using iText.Kernel.Colors;
-using iText.Kernel.Pdf.Canvas.Draw;
-using Sem_Projekt_Dec_24.Tables;
+
 
 namespace Sem_Projekt_Dec_24.Winforms
 {
@@ -600,6 +595,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 MessageBox.Show($"An error occurred while adding the product: {ex.Message}");
             }
+        }
 
         private void btnPurchaseItem_Click(object sender, EventArgs e)
         {
