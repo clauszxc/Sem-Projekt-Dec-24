@@ -47,6 +47,13 @@
             this.btnCreateProduct = new System.Windows.Forms.Button();
             this.cmbAmount = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnPurchaseItem = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageProducts)).BeginInit();
             this.SuspendLayout();
@@ -208,6 +215,16 @@
             this.cmbAmount.Name = "cmbAmount";
             this.cmbAmount.Size = new System.Drawing.Size(121, 21);
             this.cmbAmount.TabIndex = 17;
+            // btnPurchaseItem
+            // 
+            this.btnPurchaseItem.Location = new System.Drawing.Point(328, 138);
+            this.btnPurchaseItem.Name = "btnPurchaseItem";
+            this.btnPurchaseItem.Size = new System.Drawing.Size(131, 23);
+            this.btnPurchaseItem.TabIndex = 16;
+            this.btnPurchaseItem.Text = "Purchase Item";
+            this.btnPurchaseItem.UseVisualStyleBackColor = true;
+            this.btnPurchaseItem.Click += new System.EventHandler(this.btnPurchaseItem_Click);
+
             // 
             // label1
             // 
@@ -217,6 +234,56 @@
             this.label1.Size = new System.Drawing.Size(186, 13);
             this.label1.TabIndex = 18;
             this.label1.Text = "Choose the amount you want to make";
+            this.label1.Location = new System.Drawing.Point(13, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Item ID";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Item name";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 138);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Item category";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(688, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Product ID";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(688, 90);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Product Name";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(688, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Product Category";
             // 
             // StorageCRUDForm
             // 
@@ -226,6 +293,13 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbAmount);
             this.Controls.Add(this.btnCreateProduct);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnPurchaseItem);
             this.Controls.Add(this.btnCreateStorageReport);
             this.Controls.Add(this.btnStorageGoBack);
             this.Controls.Add(this.btnStorageProductsCreate);
@@ -272,5 +346,12 @@
         private System.Windows.Forms.Button btnCreateProduct;
         private System.Windows.Forms.ComboBox cmbAmount;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnPurchaseItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
