@@ -45,6 +45,12 @@
             this.btnStorageGoBack = new System.Windows.Forms.Button();
             this.btnCreateStorageReport = new System.Windows.Forms.Button();
             this.btnPurchaseItem = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageProducts)).BeginInit();
             this.SuspendLayout();
@@ -93,7 +99,6 @@
             this.txtbStorageItemsCategory.Name = "txtbStorageItemsCategory";
             this.txtbStorageItemsCategory.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsCategory.TabIndex = 4;
-            this.txtbStorageItemsCategory.Text = "(item category)";
             // 
             // txtbStorageProductsId
             // 
@@ -101,7 +106,6 @@
             this.txtbStorageProductsId.Name = "txtbStorageProductsId";
             this.txtbStorageProductsId.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsId.TabIndex = 5;
-            this.txtbStorageProductsId.Text = "(product id)";
             // 
             // txtbStorageItemsId
             // 
@@ -109,7 +113,6 @@
             this.txtbStorageItemsId.Name = "txtbStorageItemsId";
             this.txtbStorageItemsId.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsId.TabIndex = 6;
-            this.txtbStorageItemsId.Text = "(item id)";
             // 
             // txtbStorageItemsName
             // 
@@ -117,7 +120,6 @@
             this.txtbStorageItemsName.Name = "txtbStorageItemsName";
             this.txtbStorageItemsName.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageItemsName.TabIndex = 7;
-            this.txtbStorageItemsName.Text = "(item name)";
             // 
             // txtbStorageProductsName
             // 
@@ -125,7 +127,6 @@
             this.txtbStorageProductsName.Name = "txtbStorageProductsName";
             this.txtbStorageProductsName.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsName.TabIndex = 8;
-            this.txtbStorageProductsName.Text = "(product name";
             // 
             // txtbStorageProductsCategory
             // 
@@ -133,7 +134,6 @@
             this.txtbStorageProductsCategory.Name = "txtbStorageProductsCategory";
             this.txtbStorageProductsCategory.Size = new System.Drawing.Size(100, 20);
             this.txtbStorageProductsCategory.TabIndex = 9;
-            this.txtbStorageProductsCategory.Text = "(product category";
             // 
             // btnStorageItemsCreate
             // 
@@ -205,11 +205,71 @@
             this.btnPurchaseItem.UseVisualStyleBackColor = true;
             this.btnPurchaseItem.Click += new System.EventHandler(this.btnPurchaseItem_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Item ID";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Item name";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 138);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Item category";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(688, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Product ID";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(688, 90);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Product Name";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(688, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Product Category";
+            // 
             // StorageCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPurchaseItem);
             this.Controls.Add(this.btnCreateStorageReport);
             this.Controls.Add(this.btnStorageGoBack);
@@ -255,5 +315,11 @@
         private System.Windows.Forms.Button btnStorageGoBack;
         private System.Windows.Forms.Button btnCreateStorageReport;
         private System.Windows.Forms.Button btnPurchaseItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
