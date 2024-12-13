@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iText.Kernel.Geom;
 using Sem_Projekt_Dec_24.Data;
 using Sem_Projekt_Dec_24.Tables;
 using Sem_Projekt_Dec_24.Winforms;
@@ -91,8 +92,10 @@ namespace Sem_Projekt_Dec_24.Winforms
                 int customerId = GetOrCreateCustomer();
                 int orderId = GetOrCreateOrder(customerId);
                 CreateOrderInvoice(customerId, orderId);
+                decimal priceModifier = Convert.ToDecimal(txtbQuantity.Text);
+                decimal price = 100 * priceModifier;
 
-                var selectedInvoices = GetSelectedInvoicesFromGrid(customerId, orderId);
+                var selectedInvoices = GetSelectedInvoicesFromGrid(customerId, orderId, price);
 
                 CustomerConfirmationForm customerConfirmationForm = new CustomerConfirmationForm(selectedInvoices);
                 customerConfirmationForm.StartPosition = FormStartPosition.CenterScreen;
@@ -153,7 +156,8 @@ namespace Sem_Projekt_Dec_24.Winforms
         private void CreateOrderInvoice(int  customerId, int orderId)
         {
             int productId = GetSelectedProductId();
-            decimal price = 9000;
+            decimal priceModifier = Convert.ToDecimal(txtbQuantity.Text);
+            decimal price = 9000 * priceModifier;
             if (!int.TryParse(txtbQuantity.Text, out int quantity) || quantity <= 0)
             {
                 throw new InvalidOperationException("Please enter valid quantity.");
@@ -168,7 +172,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             _dbManager.UpdateProductStock(productId, quantity);
         }
 
-        private List<OrderInvoices> GetSelectedInvoicesFromGrid(int customerId, int orderId)
+        private List<OrderInvoices> GetSelectedInvoicesFromGrid(int customerId, int orderId, decimal price)
         {
             var selectedInvoices = new List<OrderInvoices>();
             foreach (DataGridViewRow row in dgvProducts.SelectedRows)
@@ -181,7 +185,7 @@ namespace Sem_Projekt_Dec_24.Winforms
                     }
 
                     int newOrderInvoiceId = OrderInvoiceList.Count > 0 ? OrderInvoiceList.Max(oi => oi.OrderInvoiceId) + 1 : 1;
-                    var newOrderInvoice = new OrderInvoices(newOrderInvoiceId, customerId, product.ProductId, 100, quantity);
+                    var newOrderInvoice = new OrderInvoices(newOrderInvoiceId, customerId, product.ProductId, price, quantity);
                     selectedInvoices.Add(newOrderInvoice);
 
                 }

@@ -915,7 +915,9 @@ namespace Sem_Projekt_Dec_24.Data
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    string query = "DELETE FROM Customers WHERE CustomerId = @CustomerId";
+                    string query =  "DELETE FROM Orders WHERE CustomerId = @CustomerId;" +
+                                    "DELETE FROM OrderInvoices WHERE CustomerId = @CustomerId;" +
+                                    "DELETE FROM Customers WHERE CustomerId = @CustomerId;";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@CustomerId", actorId);
 
