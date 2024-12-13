@@ -561,8 +561,9 @@ namespace Sem_Projekt_Dec_24.Winforms
                 MessageBox.Show("Selected row does not contain a valid product.");
                 return;
             }
+            int productionModifier = dgvStorageProducts.SelectedRows[0].Index + 1;
             string ChosenAmount = cmbAmount.SelectedItem.ToString();
-            int selectedAmount = 1 * Int32.Parse(ChosenAmount);
+            int selectedAmount = productionModifier * Int32.Parse(ChosenAmount);
             try
             {
                 foreach (var item in ItemList)
