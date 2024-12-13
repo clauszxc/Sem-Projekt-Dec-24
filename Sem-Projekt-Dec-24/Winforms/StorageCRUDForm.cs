@@ -61,19 +61,88 @@ namespace Sem_Projekt_Dec_24.Winforms
         private void LoadProducts()
         {
             List<Products> productsFromDB = _dbManager.GetProducts();
+
             foreach (var product in productsFromDB)
             {
                 ProductList.Add(product);
             }
+
+            dgvStorageProducts.AutoGenerateColumns = false;
+            dgvStorageProducts.Columns.Clear();
+
+            dgvStorageProducts.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ProductId",
+                HeaderText = "Product ID",
+                Name = "ProductId"
+            });
+
+            dgvStorageProducts.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ProductName",
+                HeaderText = "Product Name",
+                Name = "ProductName"
+            });
+
+            dgvStorageProducts.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ProductCategory",
+                HeaderText = "Product Category",
+                Name = "ProductCategory"
+            });
+
+            dgvStorageProducts.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "ProductStock",
+                HeaderText = "Product Stock",
+                Name = "ProductStock"
+            });
+
+            dgvStorageProducts.DataSource = ProductList;
         }
 
         // Loading Items Method
         private void LoadItems()
         {
-            List<Items> itemsFromDB = _dbManager.GetItems();
-            foreach (var item in itemsFromDB)
             {
-                ItemList.Add(item);
+                List<Items> itemsFromDB = _dbManager.GetItems();
+                foreach (var item in itemsFromDB)
+                {
+                    ItemList.Add(item);
+                }
+
+                dgvStorageItems.AutoGenerateColumns = false;
+                dgvStorageItems.Columns.Clear();
+
+                dgvStorageItems.Columns.Add(new DataGridViewTextBoxColumn()
+                {
+                    DataPropertyName = "ItemId",
+                    HeaderText = "Item ID",
+                    Name = "ItemId"
+                });
+
+                dgvStorageItems.Columns.Add(new DataGridViewTextBoxColumn()
+                {
+                    DataPropertyName = "ItemName",
+                    HeaderText = "Item Name",
+                    Name = "ItemName"
+                });
+
+                dgvStorageItems.Columns.Add(new DataGridViewTextBoxColumn()
+                {
+                    DataPropertyName = "ItemCategory",
+                    HeaderText = "Item Category",
+                    Name = "ItemCategory"
+                });
+
+                dgvStorageItems.Columns.Add(new DataGridViewTextBoxColumn()
+                {
+                    DataPropertyName = "ItemStock",
+                    HeaderText = "Item Stock",
+                    Name = "ItemStock"
+                });
+
+                dgvStorageItems.DataSource = ItemList;
             }
         }
         private void LoadPurchaseOrders()
