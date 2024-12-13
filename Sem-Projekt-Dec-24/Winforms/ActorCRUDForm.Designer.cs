@@ -48,8 +48,6 @@
             this.btnActorUpdate = new System.Windows.Forms.Button();
             this.btnActorDelete = new System.Windows.Forms.Button();
             this.btnActorGoBack = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lblSelectedActor = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,15 +72,10 @@
             // cmbbChooseActor
             // 
             this.cmbbChooseActor.FormattingEnabled = true;
-            this.cmbbChooseActor.Items.AddRange(new object[] {
-            "Employees",
-            "Shippers",
-            "Customers"});
             this.cmbbChooseActor.Location = new System.Drawing.Point(12, 65);
             this.cmbbChooseActor.Name = "cmbbChooseActor";
             this.cmbbChooseActor.Size = new System.Drawing.Size(121, 21);
             this.cmbbChooseActor.TabIndex = 7;
-            this.cmbbChooseActor.SelectedIndexChanged += new System.EventHandler(this.cmbbChooseActor_SelectedIndexChanged);
             // 
             // txtbActorId
             // 
@@ -214,7 +207,6 @@
             this.btnActorDelete.TabIndex = 26;
             this.btnActorDelete.Text = "Delete";
             this.btnActorDelete.UseVisualStyleBackColor = true;
-            this.btnActorDelete.Click += new System.EventHandler(this.btnActorDelete_Click);
             // 
             // btnActorGoBack
             // 
@@ -226,30 +218,11 @@
             this.btnActorGoBack.UseVisualStyleBackColor = true;
             this.btnActorGoBack.Click += new System.EventHandler(this.btnActorGoBack_Click);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 89);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 13);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Selected:";
-            // 
-            // lblSelectedActor
-            // 
-            this.lblSelectedActor.AutoSize = true;
-            this.lblSelectedActor.Location = new System.Drawing.Point(58, 89);
-            this.lblSelectedActor.Name = "lblSelectedActor";
-            this.lblSelectedActor.Size = new System.Drawing.Size(0, 13);
-            this.lblSelectedActor.TabIndex = 29;
-            // 
             // ActorCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lblSelectedActor);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.btnActorGoBack);
             this.Controls.Add(this.btnActorDelete);
             this.Controls.Add(this.btnActorUpdate);
@@ -299,7 +272,5 @@
         private System.Windows.Forms.Button btnActorUpdate;
         private System.Windows.Forms.Button btnActorDelete;
         private System.Windows.Forms.Button btnActorGoBack;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lblSelectedActor;
     }
 }

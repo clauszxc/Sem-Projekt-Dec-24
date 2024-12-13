@@ -186,24 +186,6 @@ namespace Sem_Projekt_Dec_24.Data
                 }
             }
         }
-        public void AddPurchaseOrder(PurchaseOrders purchaseOrder)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string query =
-                    "INSERT INTO PurchaseOrders (PurchaseId, SupplierId, ItemId, ItemQuantity) " +
-                    "VALUES (@PurchaseId, @SupplierId, @ItemId, @ItemQuantity)";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@PurchaseId", purchaseOrder.PurchaseId);
-                    command.Parameters.AddWithValue("@SupplierId", purchaseOrder.SupplierId);
-                    command.Parameters.AddWithValue("@ItemId", purchaseOrder.ItemId);
-                    command.Parameters.AddWithValue("@ItemQuantity", purchaseOrder.ItemQuantity);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
 
         public void AddOrderInvoice(OrderInvoices orderInvoice)
         {
@@ -220,25 +202,6 @@ namespace Sem_Projekt_Dec_24.Data
                     command.Parameters.AddWithValue("@ProductId", orderInvoice.ProductId);
                     command.Parameters.AddWithValue("@Price", orderInvoice.Price);
                     command.Parameters.AddWithValue("@Quantity", orderInvoice.Quantity);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-        public void AddPurchaseOrderInvoice(PurchaseOrderInvoices purchaseOrderInvoice)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string query =
-                    "INSERT INTO PurchaseOrderInvoices (PurchaseOrderInvoiceId, SupplierId, ItemId, Price, Quantity) " +
-                    "VALUES (@PurchaseOrderInvoiceId, @SupplierId, @ItemId, @Price, @Quantity)";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@PurchaseOrderInvoiceId", purchaseOrderInvoice.PurchaseOrderInvoiceId);
-                    command.Parameters.AddWithValue("@SupplierId", purchaseOrderInvoice.SupplierId);
-                    command.Parameters.AddWithValue("@ItemId", purchaseOrderInvoice.ItemId);
-                    command.Parameters.AddWithValue("@Price", purchaseOrderInvoice.Price);
-                    command.Parameters.AddWithValue("@Quantity", purchaseOrderInvoice.Quantity);
                     command.ExecuteNonQuery();
                 }
             }
@@ -530,34 +493,6 @@ namespace Sem_Projekt_Dec_24.Data
             }
             return PurchaseOrderList;
         }
-        public List<PurchaseOrderInvoices> GetPurchaseOrderInvoices()
-        {
-            List<PurchaseOrderInvoices> purchaseOrderInvoiceList = new List<PurchaseOrderInvoices>();
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string query = "SELECT * FROM PurchaseOrderInvoices";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            PurchaseOrderInvoices e = new PurchaseOrderInvoices(
-                                reader.GetInt32(0),
-                                reader.GetInt32(1),
-                                reader.GetInt32(2),
-                                reader.GetDecimal(3),
-                                reader.GetInt32(4)
-                            );
-
-                            purchaseOrderInvoiceList.Add(e);
-                        }
-                    }
-                }
-            }
-            return purchaseOrderInvoiceList;
-        }
 
         public List<Shipments> GetShipments()
         {
@@ -830,111 +765,19 @@ namespace Sem_Projekt_Dec_24.Data
         }
 
         // Delete methods for Actors
-        public void DeleteEmployee(int actorId)
+        public void DeleteEmployee(Employees employee)
         {
-            var employeeToDelete = EmployeeList.FirstOrDefault(p => p.EmployeeId == actorId);
-
-            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this employee?", "Confirm Deletion", MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.No)
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                return;
-            }
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                connection.Open();
+                string query =
+                    "DELETE FROM Employees " +
+                    "WHERE EmployeeId = @EmployeeId";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    string query = "DELETE FROM Employees WHERE EmployeeId = @EmployeeId";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@EmployeeId", actorId);
-
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Employee deleted successfully.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Employee not found in the database.");
-                    }
+                    command.Parameters.AddWithValue("@EmployeeId", employee.EmployeeId.ToString());
+                    command.ExecuteNonQuery();
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Not working in Employee");
-            }
-        }
-
-        public void DeleteShipper(int actorId)
-        {
-            var shipperToDelete = ShipperList.FirstOrDefault(p => p.ShipperId == actorId);
-
-            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this Shipper?", "Confirm Deletion", MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.No)
-            {
-                return;
-            }
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    string query = "DELETE FROM Shippers WHERE ShipperId = @ShipperId";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@ShipperId", actorId);
-
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Shipper deleted successfully.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Shipper not found in the database.");
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Not working in Shipper");
-            }
-        }
-
-        public void DeleteCustomer(int actorId)
-        {
-            var customerToDelete = CustomerList.FirstOrDefault(p => p.CustomerId == actorId);
-
-            DialogResult confirmResult = MessageBox.Show("Are you sure you want to delete this Customer?", "Confirm Deletion", MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.No)
-            {
-                return;
-            }
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    string query = "DELETE FROM Customers WHERE CustomerId = @CustomerId";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@CustomerId", actorId);
-
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Customer deleted successfully.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Customer not found in the database.");
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Not working in Customer");
             }
         }
 
