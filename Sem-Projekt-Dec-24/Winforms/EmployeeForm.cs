@@ -66,8 +66,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 ProductList.Add(product);
             }
-            listBox1.DataSource = ProductList;
-            listBox1.DisplayMember = "ProductInformation";
+            lboxEmployee.DataSource = ProductList;
+            lboxEmployee.DisplayMember = "ProductInformation";
         }
 
         private void btnItemsList_Click(object sender, EventArgs e)
@@ -78,8 +78,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 ItemList.Add(product);
             }
-            listBox1.DataSource = ItemList;
-            listBox1.DisplayMember = "ItemInformation";
+            lboxEmployee.DataSource = ItemList;
+            lboxEmployee.DisplayMember = "ItemInformation";
         }
 
         private void btnCustomersList_Click(object sender, EventArgs e)
@@ -90,8 +90,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 CustomerList.Add(customers);
             }
-            listBox1.DataSource = CustomerList;
-            listBox1.DisplayMember = "CustomerInformation";
+            lboxEmployee.DataSource = CustomerList;
+            lboxEmployee.DisplayMember = "CustomerInformation";
         }
 
         private void btnEmployeesList_Click(object sender, EventArgs e)
@@ -102,8 +102,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 EmployeeList.Add(employees);
             }
-            listBox1.DataSource = EmployeeList;
-            listBox1.DisplayMember = "EmployeeInformation";
+            lboxEmployee.DataSource = EmployeeList;
+            lboxEmployee.DisplayMember = "EmployeeInformation";
         }
 
         private void btnShippersList_Click(object sender, EventArgs e)
@@ -114,8 +114,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 ShipperList.Add(shippers);
             }
-            listBox1.DataSource = ShipperList;
-            listBox1.DisplayMember = "ShipperName";
+            lboxEmployee.DataSource = ShipperList;
+            lboxEmployee.DisplayMember = "ShipperName";
         }
 
         private void btnSuppliersList_Click(object sender, EventArgs e)
@@ -126,8 +126,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 SupplierList.Add(suppliers);
             }
-            listBox1.DataSource = SupplierList;
-            listBox1.DisplayMember = "SupplierId";
+            lboxEmployee.DataSource = SupplierList;
+            lboxEmployee.DisplayMember = "SupplierId";
         }
 
         private void btnPurchaseOrdersList_Click(object sender, EventArgs e)
@@ -138,8 +138,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 PurchaseOrderList.Add(purchaseorders);
             }
-            listBox1.DataSource = PurchaseOrderList;
-            listBox1.DisplayMember = "PurchaseOrderInformation";
+            lboxEmployee.DataSource = PurchaseOrderList;
+            lboxEmployee.DisplayMember = "PurchaseOrderInformation";
         }
 
         private void btnOrdersList_Click(object sender, EventArgs e)
@@ -150,8 +150,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 OrderList.Add(orders);
             }
-            listBox1.DataSource = OrderList;
-            listBox1.DisplayMember = "OrderInformation";
+            lboxEmployee.DataSource = OrderList;
+            lboxEmployee.DisplayMember = "OrderInformation";
         }
 
         private void btnShipmentsList_Click(object sender, EventArgs e)
@@ -162,8 +162,8 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 ShipmentList.Add(shipments);
             }
-            listBox1.DataSource = ShipmentList;
-            listBox1.DisplayMember = "ShipmentInformation";
+            lboxEmployee.DataSource = ShipmentList;
+            lboxEmployee.DisplayMember = "ShipmentInformation";
         }
     }
 }
