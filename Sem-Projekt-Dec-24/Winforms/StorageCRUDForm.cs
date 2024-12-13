@@ -594,6 +594,7 @@ namespace Sem_Projekt_Dec_24.Winforms
             {
                 MessageBox.Show($"An error occurred while adding the product: {ex.Message}");
             }
+        }
 
         private void btnPurchaseItem_Click(object sender, EventArgs e)
         {
