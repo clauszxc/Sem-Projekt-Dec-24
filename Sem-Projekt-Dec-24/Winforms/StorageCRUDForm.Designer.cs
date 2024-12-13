@@ -44,6 +44,9 @@
             this.btnStorageProductsCreate = new System.Windows.Forms.Button();
             this.btnStorageGoBack = new System.Windows.Forms.Button();
             this.btnCreateStorageReport = new System.Windows.Forms.Button();
+            this.btnCreateProduct = new System.Windows.Forms.Button();
+            this.cmbAmount = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStorageProducts)).BeginInit();
             this.SuspendLayout();
@@ -188,11 +191,41 @@
             this.btnCreateStorageReport.UseVisualStyleBackColor = true;
             this.btnCreateStorageReport.Click += new System.EventHandler(this.btnCreateStorageReport_Click);
             // 
+            // btnCreateProduct
+            // 
+            this.btnCreateProduct.Location = new System.Drawing.Point(328, 12);
+            this.btnCreateProduct.Name = "btnCreateProduct";
+            this.btnCreateProduct.Size = new System.Drawing.Size(117, 34);
+            this.btnCreateProduct.TabIndex = 16;
+            this.btnCreateProduct.Text = "Create Products From Items";
+            this.btnCreateProduct.UseVisualStyleBackColor = true;
+            this.btnCreateProduct.Click += new System.EventHandler(this.btnCreateProduct_Click);
+            // 
+            // cmbAmount
+            // 
+            this.cmbAmount.FormattingEnabled = true;
+            this.cmbAmount.Location = new System.Drawing.Point(328, 69);
+            this.cmbAmount.Name = "cmbAmount";
+            this.cmbAmount.Size = new System.Drawing.Size(121, 21);
+            this.cmbAmount.TabIndex = 17;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(300, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Choose the amount you want to make";
+            // 
             // StorageCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbAmount);
+            this.Controls.Add(this.btnCreateProduct);
             this.Controls.Add(this.btnCreateStorageReport);
             this.Controls.Add(this.btnStorageGoBack);
             this.Controls.Add(this.btnStorageProductsCreate);
@@ -236,5 +269,8 @@
         private System.Windows.Forms.Button btnStorageProductsCreate;
         private System.Windows.Forms.Button btnStorageGoBack;
         private System.Windows.Forms.Button btnCreateStorageReport;
+        private System.Windows.Forms.Button btnCreateProduct;
+        private System.Windows.Forms.ComboBox cmbAmount;
+        private System.Windows.Forms.Label label1;
     }
 }

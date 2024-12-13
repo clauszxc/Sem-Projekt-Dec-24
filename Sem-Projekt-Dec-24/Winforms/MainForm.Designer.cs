@@ -39,7 +39,7 @@
             this.btnCustomer.BackColor = System.Drawing.Color.Transparent;
             this.btnCustomer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnCustomer.Location = new System.Drawing.Point(320, 288);
+            this.btnCustomer.Location = new System.Drawing.Point(320, 277);
             this.btnCustomer.Name = "btnCustomer";
             this.btnCustomer.Size = new System.Drawing.Size(77, 69);
             this.btnCustomer.TabIndex = 1;
@@ -56,7 +56,7 @@
             this.btnEmployee.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnEmployee.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnEmployee.Location = new System.Drawing.Point(415, 288);
+            this.btnEmployee.Location = new System.Drawing.Point(422, 277);
             this.btnEmployee.Name = "btnEmployee";
             this.btnEmployee.Size = new System.Drawing.Size(78, 69);
             this.btnEmployee.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Sem_Projekt_Dec_24.Properties.Resources.yes;
+            this.pictureBox1.Image = global::Sem_Projekt_Dec_24.Properties.Resources.file_3dNjEdtJdvQdAxZrWsck2u;
             this.pictureBox1.InitialImage = global::Sem_Projekt_Dec_24.Properties.Resources.file_SCBpFxU7Z7AC4gC7Ep6Sa5;
             this.pictureBox1.Location = new System.Drawing.Point(-4, 0);
             this.pictureBox1.Name = "pictureBox1";

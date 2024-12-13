@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnProductsList = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lboxEmployee = new System.Windows.Forms.ListBox();
             this.btnItemsList = new System.Windows.Forms.Button();
             this.btnShipmentsList = new System.Windows.Forms.Button();
             this.btnCustomersList = new System.Windows.Forms.Button();
@@ -53,13 +53,13 @@
             this.btnProductsList.UseVisualStyleBackColor = true;
             this.btnProductsList.Click += new System.EventHandler(this.btnProductsList_Click);
             // 
-            // listBox1
+            // lboxEmployee
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(607, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(194, 446);
-            this.listBox1.TabIndex = 1;
+            this.lboxEmployee.FormattingEnabled = true;
+            this.lboxEmployee.Location = new System.Drawing.Point(537, 0);
+            this.lboxEmployee.Name = "lboxEmployee";
+            this.lboxEmployee.Size = new System.Drawing.Size(264, 446);
+            this.lboxEmployee.TabIndex = 1;
             // 
             // btnItemsList
             // 
@@ -187,7 +187,7 @@
             this.Controls.Add(this.btnCustomersList);
             this.Controls.Add(this.btnShipmentsList);
             this.Controls.Add(this.btnItemsList);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lboxEmployee);
             this.Controls.Add(this.btnProductsList);
             this.Name = "EmployeeForm";
             this.Text = "EmployeeForm";
@@ -198,7 +198,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnProductsList;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lboxEmployee;
         private System.Windows.Forms.Button btnItemsList;
         private System.Windows.Forms.Button btnShipmentsList;
         private System.Windows.Forms.Button btnCustomersList;
